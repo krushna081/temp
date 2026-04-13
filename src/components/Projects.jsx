@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 import { projects } from '../data'
 
-const categories = ['All', 'Web', 'AI']
+const categories = ['All', 'Cybersecurity', 'Research', 'Development']
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('All')
@@ -192,6 +192,7 @@ function ProjectCard({ project, index, inView }) {
           lineHeight: 1.65,
           marginBottom: '1rem',
           flex: 1,
+          whiteSpace: 'pre-wrap',
         }}>
           {project.description}
         </p>

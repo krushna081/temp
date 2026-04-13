@@ -51,7 +51,7 @@ export default function Footer() {
               backgroundClip: 'text',
               marginBottom: '0.75rem',
             }}>
-              {'<KB />'}
+              {'<KJ />'}
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.7, maxWidth: 260, marginBottom: '1.25rem' }}>
               Computer Science student & Full Stack Developer building elegant, impactful solutions.

@@ -295,7 +295,7 @@ function HeroAvatar() {
           color: 'rgba(255,255,255,0.9)',
           userSelect: 'none',
         }}>
-          KB
+          KJ
         </span>
       </div>
 

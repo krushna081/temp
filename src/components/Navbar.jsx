@@ -88,7 +88,7 @@ export default function Navbar() {
                   lineHeight: 1,
                 }}
               >
-                {'<KB />'}
+                {'<KJ />'}
               </motion.div>
             </Link>
 
@@ -216,7 +216,7 @@ export default function Navbar() {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}>
-                {'<KB />'}
+                {'<KJ />'}
               </span>
               <motion.button
                 whileTap={{ scale: 0.88 }}

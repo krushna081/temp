@@ -9,14 +9,15 @@ import { useInView } from 'react-intersection-observer'
 import { skills } from '../data'
 
 const categoryMeta = {
-  frontend: { label: 'Frontend', emoji: '🎨', color: '#6366f1' },
-  backend: { label: 'Backend', emoji: '⚙️', color: '#22c55e' },
+  cybersecurity: { label: 'Cybersecurity', emoji: '🛡️', color: '#ef4444' },
+  programming: { label: 'Programming', emoji: '💻', color: '#3b82f6' },
+  aiml: { label: 'AI/ML', emoji: '🤖', color: '#8b5cf6' },
+  webdev: { label: 'Web Dev', emoji: '🌐', color: '#10b981' },
   tools: { label: 'Tools', emoji: '🛠️', color: '#f59e0b' },
-  aiml: { label: 'AI / ML', emoji: '🤖', color: '#ec4899' },
 }
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState('frontend')
+  const [activeTab, setActiveTab] = useState('cybersecurity')
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 })
 
   const currentSkills = skills[activeTab]

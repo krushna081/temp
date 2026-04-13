@@ -76,6 +76,18 @@ export default function Contact() {
               </p>
             </div>
 
+            <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.5rem', background: 'linear-gradient(135deg, rgba(99,102,241,0.05), rgba(168,85,247,0.05))', border: '1px solid rgba(99,102,241,0.3)' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                Schedule a Meeting
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem' }}>
+                Interested in cybersecurity consulting, research collaboration, or project opportunities? Schedule a direct meeting with me.
+              </p>
+              <a href="https://calendly.com/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.85rem' }}>
+                Schedule Now
+              </a>
+            </div>
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               {contactCards.map((c, i) => (
                 <motion.div
