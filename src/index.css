@@ -9,6 +9,7 @@
 :root {
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
 
   /* Light Mode */
   --bg-primary: #f8fafc;
@@ -22,6 +23,16 @@
   --accent-glow: rgba(99, 102, 241, 0.3);
   --gradient-start: #6366f1;
   --gradient-end: #a855f7;
+
+  /* Terminal colors */
+  --terminal-bg: #0d1117;
+  --terminal-header: #161b22;
+  --terminal-border: #30363d;
+  --terminal-text: #c9d1d9;
+  --terminal-prompt: #7ee787;
+  --terminal-accent: #79c0ff;
+  --terminal-error: #ff7b72;
+  --terminal-muted: #6e7681;
 }
 
 .dark {
@@ -90,7 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
   font-family: var(--font-display);
   font-weight: 700;
   text-align: center;
@@ -101,7 +112,7 @@ h1, h2, h3, h4, h5, h6 {
 .section-subtitle {
   text-align: center;
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   margin-bottom: 3rem;
   max-width: 500px;
   margin-left: auto;
@@ -148,6 +159,7 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   color: #fff;
   box-shadow: 0 4px 15px var(--accent-glow);
+  white-space: nowrap;
 }
 
 .btn-primary:hover {
@@ -169,6 +181,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 2px solid var(--accent);
   background: transparent;
   color: var(--accent);
+  white-space: nowrap;
 }
 
 .btn-outline:hover {
@@ -261,11 +274,286 @@ h1, h2, h3, h4, h5, h6 {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes terminal-slide-in {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes tap-ping {
+  0% { transform: scale(1); opacity: 1; }
+  70% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
 .animate-float { animation: float 4s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
 .animate-spin-slow { animation: spin-slow 12s linear infinite; }
+.animate-blink { animation: blink-cursor 1s step-end infinite; }
 
-/* ---- Responsive Helpers ---- */
+/* =============================================
+   MOBILE RESPONSIVE FIXES — Global
+   ============================================= */
+
+/* Section containers scale on mobile */
 @media (max-width: 768px) {
-  .section-container { padding: 4rem 1.25rem; }
+  .section-container { padding: 3.5rem 1rem; }
+  .section-subtitle { margin-bottom: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .section-container { padding: 3rem 0.875rem; }
+  .btn-primary, .btn-outline {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ---- Mobile Navbar Overlay ---- */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(4px);
+}
+
+/* ---- Hero mobile fix ---- */
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+    text-align: center;
+    gap: 2rem !important;
+  }
+  .hero-grid > div:first-child {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-avatar-wrapper { order: 1; }
+  .hero-avatar-inner {
+    width: 180px !important;
+    height: 180px !important;
+  }
+  .hero-avatar-inner span {
+    font-size: 3rem !important;
+  }
+}
+
+/* ---- About mobile fix ---- */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---- Projects mobile fix ---- */
+@media (max-width: 1024px) {
+  .projects-grid { grid-template-columns: repeat(2,1fr) !important; }
+}
+@media (max-width: 600px) {
+  .projects-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---- Skills mobile fix ---- */
+@media (max-width: 640px) {
+  .skills-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---- Experience timeline mobile fix ---- */
+@media (max-width: 640px) {
+  .timeline-line { left: 20px !important; transform: none !important; }
+  .timeline-item-left, .timeline-item-right {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding-left: 56px !important;
+    padding-right: 8px !important;
+  }
+  .timeline-card {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .timeline-dot { left: 4px !important; transform: none !important; }
+}
+
+/* ---- Contact mobile fix ---- */
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr !important; }
+}
+
+/* ---- Footer mobile fix ---- */
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---- Touch-friendly interactive elements ---- */
+@media (hover: none) {
+  .glass-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+}
+
+/* Minimum 44px touch targets */
+button, a, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+/* Exception for tiny inline */
+.tech-tag, .divider-pill span { min-height: unset; min-width: unset; }
+.timeline-dot { min-height: unset; min-width: unset; }
+
+/* =============================================
+   TERMINAL STYLES
+   ============================================= */
+
+.terminal-wrapper {
+  background: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--terminal-header);
+  border-bottom: 1px solid var(--terminal-border);
+  user-select: none;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.terminal-dot.red   { background: #ff5f57; }
+.terminal-dot.yellow{ background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+
+.terminal-title {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.78rem;
+  color: var(--terminal-muted);
+  letter-spacing: 0.05em;
+}
+
+.terminal-body {
+  height: 420px;
+  overflow-y: auto;
+  padding: 1rem 1.25rem;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 640px) {
+  .terminal-body { height: 320px; }
+}
+
+.terminal-body::-webkit-scrollbar { width: 4px; }
+.terminal-body::-webkit-scrollbar-track { background: transparent; }
+.terminal-body::-webkit-scrollbar-thumb { background: var(--terminal-border); border-radius: 2px; }
+
+.terminal-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  animation: terminal-slide-in 0.15s ease;
+}
+
+.terminal-prompt-symbol {
+  color: var(--terminal-prompt);
+  font-weight: 700;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.terminal-cmd-text {
+  color: var(--terminal-accent);
+}
+
+.terminal-output {
+  color: var(--terminal-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal-output.error { color: var(--terminal-error); }
+.terminal-output.success { color: var(--terminal-prompt); }
+.terminal-output.info { color: var(--terminal-accent); }
+.terminal-output.muted { color: var(--terminal-muted); }
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--terminal-border);
+  background: var(--terminal-bg);
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--terminal-accent);
+  caret-color: var(--terminal-prompt);
+}
+
+.terminal-input::placeholder {
+  color: var(--terminal-muted);
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: var(--terminal-prompt);
+  animation: blink-cursor 1s step-end infinite;
+  flex-shrink: 0;
+  border-radius: 1px;
+}
+
+/* =============================================
+   CURSOR CHARACTER STYLES
+   ============================================= */
+.cursor-character {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  /* performance layer */
+  transform: translateZ(0);
+}
+
+/* Mobile: tap animation ring */
+.tap-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  animation: tap-ping 0.6s ease-out forwards;
 }

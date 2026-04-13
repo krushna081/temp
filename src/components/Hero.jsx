@@ -57,7 +57,7 @@ export default function Hero() {
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr auto',
-          gap: '3rem',
+          gap: '2.5rem',
           alignItems: 'center',
         }}
           className="hero-grid"
@@ -244,9 +244,12 @@ export default function Hero() {
         .hero-grid { grid-template-columns: 1fr auto; }
         .hero-avatar-wrapper { display: block; }
         @media (max-width: 768px) {
-          .hero-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+          .hero-grid { grid-template-columns: 1fr !important; justify-items: center; text-align: center; gap: 1.5rem !important; }
           .hero-grid > div:first-child { order: 2; display: flex; flex-direction: column; align-items: center; }
           .hero-avatar-wrapper { order: 1; }
+        }
+        @media (max-width: 480px) {
+          .floating-badge { display: none !important; }
         }
       `}</style>
     </section>
@@ -255,7 +258,7 @@ export default function Hero() {
 
 function HeroAvatar() {
   return (
-    <div style={{ position: 'relative', width: 280, height: 280 }} className="animate-float">
+    <div style={{ position: 'relative', width: 'clamp(180px, 30vw, 280px)', height: 'clamp(180px, 30vw, 280px)' }} className="animate-float">
       {/* Spinning gradient ring */}
       <div
         className="animate-spin-slow"
@@ -274,18 +277,21 @@ function HeroAvatar() {
         zIndex: 1,
       }} />
       {/* Avatar image */}
-      <div style={{
-        position: 'relative', zIndex: 2,
-        width: '100%', height: '100%',
-        borderRadius: '50%',
-        overflow: 'hidden',
-        background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
+      <div
+        className="hero-avatar-inner"
+        style={{
+          position: 'relative', zIndex: 2,
+          width: '100%', height: '100%',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}
+      >
         <span style={{
           fontFamily: 'var(--font-display)',
           fontWeight: 900,
-          fontSize: '5rem',
+          fontSize: 'clamp(2.5rem, 8vw, 5rem)',
           color: 'rgba(255,255,255,0.9)',
           userSelect: 'none',
         }}>
@@ -293,7 +299,7 @@ function HeroAvatar() {
         </span>
       </div>
 
-      {/* Floating Tech Badges */}
+      {/* Floating Tech Badges — hidden on very small screens via CSS */}
       <FloatingBadge label="React" icon="⚛️" style={{ top: 10, right: -30 }} delay={0} />
       <FloatingBadge label="Node.js" icon="🟢" style={{ bottom: 40, left: -40 }} delay={0.3} />
       <FloatingBadge label="AI/ML" icon="🤖" style={{ bottom: 10, right: -20 }} delay={0.6} />
@@ -304,6 +310,7 @@ function HeroAvatar() {
 function FloatingBadge({ label, icon, style, delay }) {
   return (
     <motion.div
+      className="floating-badge"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: delay + 0.8, type: 'spring' }}
@@ -312,16 +319,17 @@ function FloatingBadge({ label, icon, style, delay }) {
         display: 'flex',
         alignItems: 'center',
         gap: '0.3rem',
-        padding: '0.3rem 0.7rem',
+        padding: '0.25rem 0.6rem',
         borderRadius: '50px',
         background: 'var(--bg-card)',
         border: '1px solid var(--border)',
         boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
-        fontSize: '0.78rem',
+        fontSize: '0.75rem',
         fontWeight: 600,
         color: 'var(--text-primary)',
         whiteSpace: 'nowrap',
         zIndex: 10,
+        minHeight: 'unset', minWidth: 'unset',
         ...style,
       }}
     >

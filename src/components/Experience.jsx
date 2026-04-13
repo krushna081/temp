@@ -104,12 +104,13 @@ function TimelineItem({ exp, index, inView, isRight }) {
 
       {/* Card */}
       <div
-        className="glass-card"
+        className="glass-card timeline-card"
         style={{
           width: 'calc(50% - 36px)',
           padding: '1.25rem 1.5rem',
           marginRight: isRight ? 0 : 'calc(50% + 36px)',
           marginLeft: isRight ? 'calc(50% + 36px)' : 0,
+          minWidth: 0,
         }}
       >
         {/* Type Badge */}
