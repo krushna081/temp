@@ -12,8 +12,10 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Experience from './components/Experience'
+import Terminal from './components/Terminal'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import CursorCharacter from './components/CursorCharacter'
 
 /* ---- Main Page ---- */
 function HomePage() {
@@ -26,6 +28,7 @@ function HomePage() {
         <Projects />
         <Skills />
         <Experience />
+        <Terminal />
         <Contact />
       </main>
       <Footer />
@@ -37,6 +40,7 @@ function HomePage() {
 export default function App() {
   return (
     <ThemeProvider>
+      <CursorCharacter />
       {/* HashRouter ensures GitHub Pages compatibility without server config */}
       <HashRouter>
         <Routes>

@@ -9,7 +9,7 @@
 
 /* ---- Personal Info ---- */
 export const personalInfo = {
-  name: 'Krushna Borgaonkar',
+  name: 'Krushna Jadhav',
   title: 'Full Stack Developer',
   taglines: [
     'Full Stack Developer',
