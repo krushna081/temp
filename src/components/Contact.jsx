@@ -83,7 +83,7 @@ export default function Contact() {
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem' }}>
                 Interested in cybersecurity consulting, research collaboration, or project opportunities? Schedule a direct meeting with me.
               </p>
-              <a href="https://calendly.com/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.85rem' }}>
+              <a href="https://calendly.com/krushnacjadhav0807" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.85rem' }}>
                 Schedule Now
               </a>
             </div>

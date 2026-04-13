@@ -16,6 +16,7 @@ import Terminal from './components/Terminal'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import CursorCharacter from './components/CursorCharacter'
+import ScheduleButton from './components/ScheduleButton'
 
 /* ---- Main Page ---- */
 function HomePage() {
@@ -41,6 +42,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <CursorCharacter />
+      <ScheduleButton />
       {/* HashRouter ensures GitHub Pages compatibility without server config */}
       <HashRouter>
         <Routes>
