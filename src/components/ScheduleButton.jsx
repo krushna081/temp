@@ -36,9 +36,6 @@ export default function ScheduleButton() {
     <>
       <motion.button
         onClick={openCalendly}
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1, type: 'spring', stiffness: 200, damping: 20 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Schedule a Meeting"
@@ -59,31 +56,45 @@ export default function ScheduleButton() {
           fontWeight: 600,
           fontSize: '0.95rem',
           cursor: 'pointer',
+          opacity: 1,
+          visibility: 'visible',
         }}
       >
-        <FiCalendar size={18} />
-        <span className="schedule-txt">Schedule Meeting</span>
+        <FiCalendar size={18} style={{ flexShrink: 0 }} />
+        <span className="schedule-txt">
+          <span className="txt-desktop">Schedule a Meeting with Krushna Jadhav</span>
+          <span className="txt-mobile">Schedule a Meeting</span>
+        </span>
       </motion.button>
 
       <style>{`
+        .txt-mobile { display: none; }
         .schedule-fab {
           bottom: 2rem;
           right: 2rem;
+          min-height: 48px;
         }
         @media (max-width: 768px) {
+          .txt-desktop { display: none; }
+          .txt-mobile { display: inline; }
           .schedule-fab {
-            bottom: 1.5rem;
+            bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
             right: 1.5rem;
-            padding: 0.75rem 1rem !important;
-          }
-          .schedule-txt {
-            display: none; /* Hide text on mobile to save space so it doesn't block UI */
+            left: 1.5rem;
+            width: calc(100% - 3rem);
+            justify-content: center;
+            padding: 0.85rem 1.25rem !important;
+            min-height: 48px;
+            z-index: 9998;
           }
         }
         @media (max-width: 480px) {
           .schedule-fab {
-            bottom: 1rem;
+            bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
             right: 1rem;
+            left: 1rem;
+            width: calc(100% - 2rem);
+            padding: 0.85rem 1rem !important;
           }
         }
       `}</style>

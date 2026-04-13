@@ -104,6 +104,10 @@ export default function Hero() {
               <span className="gradient-text">{personalInfo.name.split(' ')[0]}</span>
               <br />
               <span style={{ color: 'var(--text-primary)' }}>{personalInfo.name.split(' ').slice(1).join(' ')}</span>
+              <br />
+              <span style={{ color: 'var(--text-muted)', fontSize: 'clamp(1rem, 3vw, 1.8rem)', fontWeight: 600 }}>
+                (Krushna081)
+              </span>
             </motion.h1>
 
             {/* Typing Animation */}
@@ -300,9 +304,9 @@ function HeroAvatar() {
       </div>
 
       {/* Floating Tech Badges — hidden on very small screens via CSS */}
-      <FloatingBadge label="React" icon="⚛️" style={{ top: 10, right: -30 }} delay={0} />
-      <FloatingBadge label="Node.js" icon="🟢" style={{ bottom: 40, left: -40 }} delay={0.3} />
-      <FloatingBadge label="AI/ML" icon="🤖" style={{ bottom: 10, right: -20 }} delay={0.6} />
+      <FloatingBadge label="Defense" icon="🛡️" style={{ top: 10, right: -30 }} delay={0} />
+      <FloatingBadge label="Security" icon="🔒" style={{ bottom: 40, left: -40 }} delay={0.3} />
+      <FloatingBadge label="Research" icon="🔬" style={{ bottom: 10, right: -20 }} delay={0.6} />
     </div>
   )
 }

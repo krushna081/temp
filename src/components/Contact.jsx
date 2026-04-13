@@ -52,9 +52,9 @@ export default function Contact() {
     <section id="contact" style={{ backgroundColor: 'var(--bg-secondary)' }}>
       <div className="section-container" ref={ref}>
         <div className="divider-pill"><span>Get In Touch</span></div>
-        <h2 className="section-title">Contact Me</h2>
+        <h2 className="section-title">Contact Krushna Jadhav (Krushna081)</h2>
         <p className="section-subtitle">
-          Have a project in mind or just want to say hi? I'd love to hear from you!
+          Have a project in mind or want to discuss cybersecurity research? I'd love to hear from you!
         </p>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '2.5rem', alignItems: 'start' }}
@@ -78,7 +78,7 @@ export default function Contact() {
 
             <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.5rem', background: 'linear-gradient(135deg, rgba(99,102,241,0.05), rgba(168,85,247,0.05))', border: '1px solid rgba(99,102,241,0.3)' }}>
               <h3 style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-                Schedule a Meeting
+                Schedule a Meeting with Krushna Jadhav
               </h3>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem' }}>
                 Interested in cybersecurity consulting, research collaboration, or project opportunities? Schedule a direct meeting with me.
