@@ -104,8 +104,7 @@ export default function Hero() {
               <span className="gradient-text">{personalInfo.name.split(' ')[0]}</span>
               <br />
               <span style={{ color: 'var(--text-primary)' }}>{personalInfo.name.split(' ').slice(1).join(' ')}</span>
-              <br />
-              <span style={{ color: 'var(--text-muted)', fontSize: 'clamp(1rem, 3vw, 1.8rem)', fontWeight: 600 }}>
+              <span style={{ display: 'block', color: 'var(--text-muted)', fontSize: 'clamp(1rem, 4vw, 1.6rem)', fontWeight: 600, marginTop: '0.5rem' }}>
                 (Krushna081)
               </span>
             </motion.h1>

@@ -60,41 +60,36 @@ export default function ScheduleButton() {
           visibility: 'visible',
         }}
       >
-        <FiCalendar size={18} style={{ flexShrink: 0 }} />
-        <span className="schedule-txt">
-          <span className="txt-desktop">Schedule a Meeting with Krushna Jadhav</span>
-          <span className="txt-mobile">Schedule a Meeting</span>
-        </span>
+        <FiCalendar size={18} />
+        <span className="schedule-txt">Schedule a Meeting </span>
       </motion.button>
 
       <style>{`
-        .txt-mobile { display: none; }
         .schedule-fab {
           bottom: 2rem;
           right: 2rem;
           min-height: 48px;
         }
         @media (max-width: 768px) {
-          .txt-desktop { display: none; }
-          .txt-mobile { display: inline; }
           .schedule-fab {
             bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
-            right: 1.5rem;
-            left: 1.5rem;
-            width: calc(100% - 3rem);
-            justify-content: center;
-            padding: 0.85rem 1.25rem !important;
-            min-height: 48px;
+            right: 1rem;
+            padding: 0.6rem 1rem !important;
+            min-height: 44px; /* Minimum touch size */
             z-index: 9998;
+          }
+          .schedule-txt {
+            font-size: 0.85rem;
           }
         }
         @media (max-width: 480px) {
           .schedule-fab {
             bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
             right: 1rem;
-            left: 1rem;
-            width: calc(100% - 2rem);
-            padding: 0.85rem 1rem !important;
+            padding: 0.6rem 1rem !important;
+          }
+          .schedule-txt {
+            font-size: 0.8rem;
           }
         }
       `}</style>
