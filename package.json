@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "1.0.0",
   "description": "Personal Portfolio - Krushna Jadhav",
-  "homepage": "https://temp.krushna081.online",
+  "homepage": "https://krushna081.online",
   "type": "module",
   "scripts": {
     "dev": "vite",
