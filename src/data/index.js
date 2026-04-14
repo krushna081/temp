@@ -18,24 +18,31 @@ export const personalInfo = {
     'Ethical Hacker',
     'Problem Solver',
   ],
-  email: 'krushna.jadhav@example.com',
+  email: 'contact@krushna081.online',
   github: 'https://github.com/krushna081',
   linkedin: 'https://linkedin.com/in/krushna081',
   twitter: 'https://twitter.com/krushna081',
+  instagram: 'https://www.instagram.com/krushna081',
   location: 'Maharashtra, India',
   about: `I am a Cyber & Digital Science student specializing in cybersecurity, research, and software development. My passion lies in understanding how complex systems break and engineering robust defenses to protect them. With a strong research mindset and a hands-on approach to problem-solving, I bridge the gap between emerging security threats and scalable software solutions. I am driven by continuous learning, whether it's exploring ethical hacking, network defense, or building secure applications from the ground up.`,
   education: [
     {
       degree: 'BSc in Cyber & Digital Science',
-      institution: 'XYZ University',
-      year: '2022 – 2026',
-      grade: 'CGPA: 8.7 / 10',
+      institution: 'K.K. Wagh ',
+      year: 'April 2025– July 2028',
+      grade: 'CGPA: not yet',
     },
     {
       degree: 'Higher Secondary (12th) — Science',
-      institution: 'ABC Junior College',
-      year: '2020 – 2022',
-      grade: 'Percentage: 91%',
+      institution: 'Progressive Public School and Junior College',
+      year: 'March 2023 – March 2025',
+      grade: 'Percentage: 64%',
+    },
+    {
+      degree: '5th to 10th',
+      institution: 'Purushotam English School',
+      year: '2018 - 2023',
+      
     },
   ],
   resumeUrl: '/resume.pdf',
@@ -147,21 +154,23 @@ export const skills = {
   ],
 }
 
-/* ---- Experience / Achievements ---- */
 export const experiences = [
   {
     type: 'experience',
-    title: 'Cybersecurity Analyst Intern',
-    organization: 'SecureTech Defenses',
-    period: 'Jun 2024 – Aug 2024',
-    description:
-      'Conducted vulnerability assessments on enterprise networks. Assisted in monitoring SIEM alerts and drafting incident response reports, improving threat mitigation times.',
-    icon: '🛡️',
+    title: 'Web Development Intern',
+    organization: 'Kumudini Infotech (Government of India Project)',
+    period: 'Sep 2025 – Present',
+    description: `• Designed and implemented responsive, mobile-first web capabilities using HTML, CSS, and JavaScript for a major Government of India project, resulting in extended digital outreach across underserved rural communities.
+• Collaborated actively within Agile development teams to map and deploy complex technical requirements, achieving accelerated deployment cycles and highly consistent code integration.
+• Engineered robust data handling logic and system efficiency upgrades, optimizing database interactions to deliver significantly faster front-end performance in low-bandwidth environments.
+• Enforced strict code quality standards through comprehensive testing and defensive programming, guaranteeing long-term scalability and strict system reliability across public-facing portals.`,
+    icon: '💻',
   },
+
   {
     type: 'achievement',
-    title: 'National Cyber Security Hackathon Finalist',
-    organization: 'Government Initiative',
+    title: 'Hackathon ',
+    organization: '',
     period: 'Dec 2024',
     description:
       'Developed a prototype for an automated endpoint detection and response (EDR) tool, reaching the national finals against 500+ competing teams.',

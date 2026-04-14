@@ -4,13 +4,14 @@
  */
 import { motion } from 'framer-motion'
 import { Link } from 'react-scroll'
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiArrowUp } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiArrowUp, FiInstagram } from 'react-icons/fi'
 import { personalInfo } from '../data'
 
 const socials = [
   { icon: <FiGithub size={18} />, href: personalInfo.github, label: 'GitHub' },
   { icon: <FiLinkedin size={18} />, href: personalInfo.linkedin, label: 'LinkedIn' },
   { icon: <FiTwitter size={18} />, href: personalInfo.twitter, label: 'Twitter' },
+  { icon: <FiInstagram size={18} />, href: personalInfo.instagram, label: 'Instagram' },
   { icon: <FiMail size={18} />, href: `mailto:${personalInfo.email}`, label: 'Email' },
 ]
 

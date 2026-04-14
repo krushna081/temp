@@ -140,7 +140,7 @@ function TimelineItem({ exp, index, inView, isRight }) {
         <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
           📅 {exp.period}
         </p>
-        <p style={{ fontSize: '0.87rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>
+        <p style={{ fontSize: '0.87rem', color: 'var(--text-secondary)', lineHeight: 1.65, whiteSpace: 'pre-wrap' }}>
           {exp.description}
         </p>
       </div>

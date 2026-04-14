@@ -6,7 +6,8 @@
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
 import { Link } from 'react-scroll'
-import { FiArrowDown, FiDownload, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi'
+import { FiArrowDown, FiDownload, FiGithub, FiLinkedin, FiTwitter, FiInstagram } from 'react-icons/fi'
+import { FaHtml5, FaCss3Alt, FaJs, FaPython, FaGitAlt, FaGithub, FaLinux } from 'react-icons/fa'
 import { personalInfo } from '../data'
 
 /* Build the typing sequence from taglines array */
@@ -21,6 +22,7 @@ export default function Hero() {
     { icon: <FiGithub />, href: personalInfo.github, label: 'GitHub' },
     { icon: <FiLinkedin />, href: personalInfo.linkedin, label: 'LinkedIn' },
     { icon: <FiTwitter />, href: personalInfo.twitter, label: 'Twitter' },
+    { icon: <FiInstagram />, href: personalInfo.instagram, label: 'Instagram' },
   ]
 
   return (
@@ -53,14 +55,20 @@ export default function Hero() {
         opacity: 0.5,
       }} />
 
+      {/* Floating Background Logos */}
+      <FloatingTechLogos />
+
       <div className="section-container" style={{ position: 'relative', zIndex: 1, paddingTop: '2rem', paddingBottom: '2rem' }}>
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr auto',
-          gap: '2.5rem',
+          display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
+          textAlign: 'center',
+          gap: '2.5rem',
+          maxWidth: '800px',
+          margin: '0 auto',
         }}
-          className="hero-grid"
+          className="hero-content"
         >
 
           {/* Left — Text Content */}
@@ -143,6 +151,7 @@ export default function Hero() {
                 lineHeight: 1.7,
                 maxWidth: '520px',
                 marginBottom: '2rem',
+                margin: '0 auto 2rem auto',
               }}
             >
               {personalInfo.about.slice(0, 160)}...
@@ -153,7 +162,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}
+              style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}
             >
               <Link to="projects" smooth offset={-64} duration={600}>
                 <button className="btn-primary">
@@ -174,7 +183,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.75 }}
-              style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}
+              style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', alignItems: 'center' }}
             >
               <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Find me on:</span>
               {socials.map((s) => (
@@ -202,16 +211,6 @@ export default function Hero() {
               ))}
             </motion.div>
           </div>
-
-          {/* Right — Avatar */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2, type: 'spring', stiffness: 100 }}
-            className="hero-avatar-wrapper"
-          >
-            <HeroAvatar />
-          </motion.div>
         </div>
 
         {/* Scroll indicator */}
@@ -244,99 +243,102 @@ export default function Hero() {
       </div>
 
       <style>{`
-        .hero-grid { grid-template-columns: 1fr auto; }
-        .hero-avatar-wrapper { display: block; }
         @media (max-width: 768px) {
-          .hero-grid { grid-template-columns: 1fr !important; justify-items: center; text-align: center; gap: 1.5rem !important; }
-          .hero-grid > div:first-child { order: 2; display: flex; flex-direction: column; align-items: center; }
-          .hero-avatar-wrapper { order: 1; }
+          .hero-content {
+            padding: 1rem;
+          }
+          .floating-logo-item {
+            font-size: clamp(32px, 5vw, 48px) !important;
+            opacity: 0.2 !important;
+          }
+          .floating-logo-item:nth-child(3n) {
+            display: none !important;
+          }
         }
         @media (max-width: 480px) {
-          .floating-badge { display: none !important; }
+          .floating-logo-item:nth-child(even) {
+            display: none !important;
+          }
         }
       `}</style>
     </section>
   )
 }
 
-function HeroAvatar() {
-  return (
-    <div style={{ position: 'relative', width: 'clamp(180px, 30vw, 280px)', height: 'clamp(180px, 30vw, 280px)' }} className="animate-float">
-      {/* Spinning gradient ring */}
-      <div
-        className="animate-spin-slow"
-        style={{
-          position: 'absolute', inset: -6,
-          borderRadius: '50%',
-          background: 'conic-gradient(from 0deg, #6366f1, #a855f7, #ec4899, #6366f1)',
-          zIndex: 0,
-        }}
-      />
-      {/* White gap ring */}
-      <div style={{
-        position: 'absolute', inset: -2,
-        borderRadius: '50%',
-        backgroundColor: 'var(--bg-primary)',
-        zIndex: 1,
-      }} />
-      {/* Avatar image */}
-      <div
-        className="hero-avatar-inner"
-        style={{
-          position: 'relative', zIndex: 2,
-          width: '100%', height: '100%',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}
-      >
-        <span style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 900,
-          fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-          color: 'rgba(255,255,255,0.9)',
-          userSelect: 'none',
-        }}>
-          KJ
-        </span>
-      </div>
+function FloatingTechLogos() {
+  const logos = [
+    // Group 1 (Main evenly spaced)
+    { Icon: FaHtml5, color: '#E34F26', top: '10%', left: '8%', size: 40, delay: 0 },
+    { Icon: FaCss3Alt, color: '#1572B6', top: '65%', left: '12%', size: 50, delay: 1.5 },
+    { Icon: FaJs, color: '#F7DF1E', top: '25%', left: '85%', size: 35, delay: 0.5 },
+    { Icon: FaPython, color: '#3776AB', top: '75%', left: '80%', size: 55, delay: 2 },
+    { Icon: FaGitAlt, color: '#F05032', top: '85%', left: '35%', size: 40, delay: 1 },
+    { Icon: FaGithub, color: 'rgba(255,255,255,0.7)', top: '15%', left: '50%', size: 45, delay: 2.5 },
+    { Icon: FaLinux, color: '#FCC624', top: '45%', left: '90%', size: 60, delay: 0.8 },
+    
+    // Group 2 (Scattered fillers)
+    { Icon: FaHtml5, color: '#E34F26', top: '40%', left: '5%', size: 25, delay: 3 },
+    { Icon: FaCss3Alt, color: '#1572B6', top: '85%', left: '60%', size: 30, delay: 4 },
+    { Icon: FaJs, color: '#F7DF1E', top: '10%', left: '30%', size: 40, delay: 2.2 },
+    { Icon: FaPython, color: '#3776AB', top: '50%', left: '20%', size: 65, delay: 1.8 },
+    { Icon: FaGitAlt, color: '#F05032', top: '35%', left: '65%', size: 45, delay: 3.5 },
+    { Icon: FaGithub, color: 'rgba(255,255,255,0.7)', top: '80%', left: '15%', size: 55, delay: 1.2 },
+    { Icon: FaLinux, color: '#FCC624', top: '20%', left: '70%', size: 35, delay: 4.5 },
 
-      {/* Floating Tech Badges — hidden on very small screens via CSS */}
-      <FloatingBadge label="Defense" icon="🛡️" style={{ top: 10, right: -30 }} delay={0} />
-      <FloatingBadge label="Security" icon="🔒" style={{ bottom: 40, left: -40 }} delay={0.3} />
-      <FloatingBadge label="Research" icon="🔬" style={{ bottom: 10, right: -20 }} delay={0.6} />
+    // Group 3 (Edge pieces)
+    { Icon: FaHtml5, color: '#E34F26', top: '90%', left: '85%', size: 45, delay: 5 },
+    { Icon: FaCss3Alt, color: '#1572B6', top: '5%', left: '70%', size: 35, delay: 2.8 },
+    { Icon: FaJs, color: '#F7DF1E', top: '60%', left: '45%', size: 50, delay: 3.2 },
+    { Icon: FaPython, color: '#3776AB', top: '95%', left: '45%', size: 30, delay: 1.5 },
+    { Icon: FaGitAlt, color: '#F05032', top: '5%', left: '90%', size: 25, delay: 0.2 },
+    { Icon: FaGithub, color: 'rgba(255,255,255,0.7)', top: '55%', left: '5%', size: 38, delay: 4.8 },
+    { Icon: FaLinux, color: '#FCC624', top: '30%', left: '40%', size: 50, delay: 2.6 },
+
+    // Group 4 (Dense core and extra scattered)
+    { Icon: FaHtml5, color: '#E34F26', top: '75%', left: '5%', size: 30, delay: 1.3 },
+    { Icon: FaCss3Alt, color: '#1572B6', top: '25%', left: '55%', size: 55, delay: 3.8 },
+    { Icon: FaJs, color: '#F7DF1E', top: '85%', left: '90%', size: 40, delay: 4.1 },
+    { Icon: FaPython, color: '#3776AB', top: '15%', left: '95%', size: 30, delay: 0.9 },
+    { Icon: FaGitAlt, color: '#F05032', top: '55%', left: '80%', size: 60, delay: 5.2 },
+    { Icon: FaGithub, color: 'rgba(255,255,255,0.7)', top: '40%', left: '30%', size: 45, delay: 2.1 },
+    { Icon: FaLinux, color: '#FCC624', top: '65%', left: '35%', size: 42, delay: 3.4 },
+  ]
+
+  return (
+    <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+      {logos.map((logo, i) => {
+        const { Icon, color, top, left, size, delay } = logo
+        return (
+          <motion.div
+            key={i}
+            className="floating-logo-item"
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 0.15, // Balanced visibility
+              y: [0, -30, 0],
+              x: [0, 15, -15, 0],
+              rotate: [0, 10, -10, 0]
+            }}
+            transition={{
+              opacity: { duration: 2 },
+              y: { duration: 15 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay },
+              x: { duration: 18 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay },
+              rotate: { duration: 20 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay }
+            }}
+            style={{
+              position: 'absolute',
+              top,
+              left,
+              fontSize: size,
+              color,
+              filter: 'blur(1.5px)', // softer blur to retain rich colors
+            }}
+          >
+            <Icon />
+          </motion.div>
+        )
+      })}
     </div>
   )
 }
 
-function FloatingBadge({ label, icon, style, delay }) {
-  return (
-    <motion.div
-      className="floating-badge"
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: delay + 0.8, type: 'spring' }}
-      style={{
-        position: 'absolute',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.3rem',
-        padding: '0.25rem 0.6rem',
-        borderRadius: '50px',
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border)',
-        boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
-        fontSize: '0.75rem',
-        fontWeight: 600,
-        color: 'var(--text-primary)',
-        whiteSpace: 'nowrap',
-        zIndex: 10,
-        minHeight: 'unset', minWidth: 'unset',
-        ...style,
-      }}
-    >
-      {icon} {label}
-    </motion.div>
-  )
-}
