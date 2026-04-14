@@ -46,6 +46,7 @@ export default function Contact() {
     { icon: <FiMapPin size={22} />, label: 'Location', value: personalInfo.location, href: null },
     { icon: <FiGithub size={22} />, label: 'GitHub', value: '@krushna081', href: personalInfo.github },
     { icon: <FiLinkedin size={22} />, label: 'LinkedIn', value: 'Connect with me', href: personalInfo.linkedin },
+    { icon: <FiCheckCircle size={22} />, label: 'Resume', value: 'Download CV', href: personalInfo.resumeUrl },
   ]
 
   return (

@@ -22,6 +22,7 @@ const quickLinks = [
   { label: 'Skills', to: 'skills' },
   { label: 'Experience', to: 'experience' },
   { label: 'Contact', to: 'contact' },
+  { label: 'Resume', href: personalInfo.resumeUrl, isExternal: true },
 ]
 
 export default function Footer() {
@@ -90,19 +91,38 @@ export default function Footer() {
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {quickLinks.map(l => (
-                <li key={l.to}>
-                  <Link to={l.to} smooth offset={-64} duration={600}
-                    style={{
-                      color: 'var(--text-secondary)',
-                      fontSize: '0.88rem',
-                      cursor: 'pointer',
-                      transition: 'color 0.2s ease',
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-                  >
-                    {l.label}
-                  </Link>
+                <li key={l.label}>
+                  {l.href ? (
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: 'var(--text-secondary)',
+                        fontSize: '0.88rem',
+                        cursor: 'pointer',
+                        textDecoration: 'none',
+                        transition: 'color 0.2s ease',
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link to={l.to} smooth offset={-64} duration={600}
+                      style={{
+                        color: 'var(--text-secondary)',
+                        fontSize: '0.88rem',
+                        cursor: 'pointer',
+                        transition: 'color 0.2s ease',
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                    >
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

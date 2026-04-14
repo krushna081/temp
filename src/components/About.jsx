@@ -5,7 +5,7 @@
  */
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FiMapPin, FiMail, FiCode, FiBook } from 'react-icons/fi'
+import { FiMapPin, FiMail, FiCode, FiBook, FiDownload } from 'react-icons/fi'
 import { personalInfo } from '../data'
 
 const cardVariants = {
@@ -57,6 +57,16 @@ export default function About() {
                 I believe great software is a blend of clean code, thoughtful UX, and genuine passion.
                 I'm always looking for ways to grow and make an impact.
               </p>
+              <div style={{ marginTop: '1.5rem' }}>
+                <a 
+                  href={personalInfo.resumeUrl} 
+                  download 
+                  className="btn-primary" 
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}
+                >
+                  Download Resume <FiDownload />
+                </a>
+              </div>
             </div>
 
             {/* Quick Info Grid */}

@@ -12,7 +12,7 @@ const COMMANDS = {
   about: 'show information about me',
   projects: 'list my projects',
   research: 'show research papers or work',
-  resume: 'provide resume link',
+  resume: 'view or download my resume',
   contact: 'show contact details',
   clear: 'clear terminal screen',
 }
@@ -79,9 +79,10 @@ export default function Terminal() {
         break
       case 'resume':
         responseLine = { 
-          type: 'info', 
-          text: `You can view or download my resume here:\n${window.location.origin}${personalInfo.resumeUrl}`
+          type: 'success', 
+          text: `You can view or download the resume here:\n${window.location.origin}${personalInfo.resumeUrl}\n(Opening in new tab...)`
         }
+        window.open(personalInfo.resumeUrl, '_blank')
         break
       case 'contact':
         responseLine = { 

@@ -14,6 +14,7 @@ import { HiMenu, HiX } from 'react-icons/hi'
 import { FiSun, FiMoon, FiTerminal } from 'react-icons/fi'
 import { useTheme } from '../context/ThemeContext'
 import { Link } from 'react-scroll'
+import { personalInfo } from '../data'
 
 const navLinks = [
   { label: 'Home',       to: 'hero' },
@@ -23,6 +24,7 @@ const navLinks = [
   { label: 'Experience', to: 'experience' },
   { label: 'Terminal',   to: 'terminal', icon: <FiTerminal size={13} /> },
   { label: 'Contact',    to: 'contact' },
+  { label: 'Resume',     href: personalInfo.resumeUrl, isExternal: true },
 ]
 
 export default function Navbar() {
@@ -98,35 +100,64 @@ export default function Navbar() {
               className="nav-desktop"
             >
               {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  smooth
-                  spy
-                  offset={-64}
-                  duration={600}
-                  activeClass="nav-link-active"
-                  style={{ minHeight: 'unset', minWidth: 'unset' }}
-                >
-                  <motion.span
-                    whileHover={{ color: 'var(--accent)' }}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.3rem',
-                      padding: '0.4rem 0.75rem',
-                      borderRadius: '8px',
-                      fontSize: '0.875rem',
-                      fontWeight: 500,
-                      cursor: 'pointer',
-                      color: 'var(--text-secondary)',
-                      transition: 'color 0.2s ease',
-                    }}
+                link.href ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none', minHeight: 'unset', minWidth: 'unset' }}
                   >
-                    {link.icon && link.icon}
-                    {link.label}
-                  </motion.span>
-                </Link>
+                    <motion.span
+                      whileHover={{ color: 'var(--accent)' }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                        padding: '0.4rem 0.75rem',
+                        borderRadius: '8px',
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        cursor: 'pointer',
+                        color: 'var(--text-secondary)',
+                        transition: 'color 0.2s ease',
+                      }}
+                    >
+                      {link.icon && link.icon}
+                      {link.label}
+                    </motion.span>
+                  </a>
+                ) : (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    smooth
+                    spy
+                    offset={-64}
+                    duration={600}
+                    activeClass="nav-link-active"
+                    style={{ minHeight: 'unset', minWidth: 'unset' }}
+                  >
+                    <motion.span
+                      whileHover={{ color: 'var(--accent)' }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                        padding: '0.4rem 0.75rem',
+                        borderRadius: '8px',
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        cursor: 'pointer',
+                        color: 'var(--text-secondary)',
+                        transition: 'color 0.2s ease',
+                      }}
+                    >
+                      {link.icon && link.icon}
+                      {link.label}
+                    </motion.span>
+                  </Link>
+                )
               ))}
               <ThemeButton isDark={isDark} toggleTheme={toggleTheme} />
             </div>
@@ -244,42 +275,72 @@ export default function Navbar() {
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', flex: 1 }}>
               {navLinks.map((link, i) => (
                 <motion.div
-                  key={link.to}
+                  key={link.label}
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.045, duration: 0.22 }}
                 >
-                  <Link
-                    to={link.to}
-                    smooth
-                    spy
-                    offset={-64}
-                    duration={600}
-                    onClick={close}
-                    style={{ minHeight: 'unset', minWidth: 'unset' }}
-                  >
-                    <motion.div
-                      whileHover={{ x: 4 }}
-                      whileTap={{ scale: 0.97 }}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.6rem',
-                        padding: '0.85rem 1rem',
-                        borderRadius: '10px',
-                        color: 'var(--text-secondary)',
-                        fontSize: '1rem',
-                        fontWeight: 500,
-                        cursor: 'pointer',
-                        transition: 'background 0.15s ease, color 0.15s ease',
-                      }}
-                      onHoverStart={e => { e.target.style.background = 'var(--bg-secondary)'; e.target.style.color = 'var(--accent)' }}
-                      onHoverEnd={e => { e.target.style.background = 'transparent'; e.target.style.color = 'var(--text-secondary)' }}
+                  {link.href ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={close}
+                      style={{ textDecoration: 'none', minHeight: 'unset', minWidth: 'unset' }}
                     >
-                      {link.icon && <span style={{ color: 'var(--accent)' }}>{link.icon}</span>}
-                      {link.label}
-                    </motion.div>
-                  </Link>
+                      <motion.div
+                        whileHover={{ x: 4 }}
+                        whileTap={{ scale: 0.97 }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.6rem',
+                          padding: '0.85rem 1rem',
+                          borderRadius: '10px',
+                          color: 'var(--text-secondary)',
+                          fontSize: '1rem',
+                          fontWeight: 500,
+                          cursor: 'pointer',
+                          transition: 'background 0.15s ease, color 0.15s ease',
+                        }}
+                      >
+                        {link.icon && <span style={{ color: 'var(--accent)' }}>{link.icon}</span>}
+                        {link.label}
+                      </motion.div>
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.to}
+                      smooth
+                      spy
+                      offset={-64}
+                      duration={600}
+                      onClick={close}
+                      style={{ minHeight: 'unset', minWidth: 'unset' }}
+                    >
+                      <motion.div
+                        whileHover={{ x: 4 }}
+                        whileTap={{ scale: 0.97 }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.6rem',
+                          padding: '0.85rem 1rem',
+                          borderRadius: '10px',
+                          color: 'var(--text-secondary)',
+                          fontSize: '1rem',
+                          fontWeight: 500,
+                          cursor: 'pointer',
+                          transition: 'background 0.15s ease, color 0.15s ease',
+                        }}
+                        onHoverStart={e => { e.target.style.background = 'var(--bg-secondary)'; e.target.style.color = 'var(--accent)' }}
+                        onHoverEnd={e => { e.target.style.background = 'transparent'; e.target.style.color = 'var(--text-secondary)' }}
+                      >
+                        {link.icon && <span style={{ color: 'var(--accent)' }}>{link.icon}</span>}
+                        {link.label}
+                      </motion.div>
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>
