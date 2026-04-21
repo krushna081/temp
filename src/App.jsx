@@ -5,6 +5,7 @@
  * and assembles all page sections.
  */
 import { HashRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="*" element={<HomePage />} />
         </Routes>
       </HashRouter>
+      <Analytics />
     </ThemeProvider>
   )
 }
