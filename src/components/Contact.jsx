@@ -24,16 +24,36 @@ export default function Contact() {
     return e
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length) { setErrors(errs); return }
+    
     setLoading(true)
-    setTimeout(() => {
+    
+    try {
+      const formData = new FormData(e.target)
+      formData.append("access_key", "eaf7e2a1-5a48-43f3-9a21-ccb764a400e2")
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      })
+
+      const data = await response.json()
+      
       setLoading(false)
-      setSubmitted(true)
-      setForm({ name: '', email: '', subject: '', message: '' })
-    }, 1500)
+      if (data.success) {
+        setSubmitted(true)
+        setForm({ name: '', email: '', subject: '', message: '' })
+      } else {
+        alert("Something went wrong: " + (data.message || "Please try again."))
+      }
+    } catch (error) {
+      setLoading(false)
+      alert("Failed to send message. Please check your internet connection.")
+      console.error("Form Submission Error:", error)
+    }
   }
 
   const handleChange = (e) => {
