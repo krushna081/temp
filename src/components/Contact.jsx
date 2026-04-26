@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiSend, FiCheckCircle } from 'react-icons/fi'
 import { personalInfo } from '../data'
+import { RevealOnScroll } from './AntiGravityLayers'
 
 export default function Contact() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 })
@@ -70,9 +71,10 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+    <section id="contact" style={{ backgroundColor: 'transparent' }}>
       <div className="section-container" ref={ref}>
-        <div className="divider-pill"><span>Get In Touch</span></div>
+        <RevealOnScroll>
+          <div className="divider-pill"><span>Get In Touch</span></div>
         <h2 className="section-title">Contact Krushna Jadhav (Krushna081)</h2>
         <p className="section-subtitle">
           Have a project in mind or want to discuss cybersecurity research? I'd love to hear from you!
@@ -117,7 +119,7 @@ export default function Contact() {
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.15 + i * 0.1 }}
                   className="glass-card"
-                  style={{ padding: '1rem 1.25rem' }}
+                  style={{ padding: '1.1rem 1.25rem' }}
                 >
                   {c.href ? (
                     <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
@@ -182,6 +184,7 @@ export default function Contact() {
             )}
           </motion.div>
         </div>
+        </RevealOnScroll>
       </div>
 
       <style>{`

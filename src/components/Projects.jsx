@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 import { projects } from '../data'
+import { RevealOnScroll } from './AntiGravityLayers'
 
 const categories = ['All', 'Cybersecurity', 'Research', 'Development']
 
@@ -20,9 +21,10 @@ export default function Projects() {
     : projects.filter(p => p.category === activeFilter)
 
   return (
-    <section id="projects" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section id="projects" style={{ backgroundColor: 'transparent' }}>
       <div className="section-container" ref={ref}>
-        <div className="divider-pill"><span>Portfolio</span></div>
+        <RevealOnScroll>
+          <div className="divider-pill"><span>Portfolio</span></div>
         <h2 className="section-title">My Projects</h2>
         <p className="section-subtitle">
           A curated selection of things I've built — from web apps to AI tools.
@@ -83,6 +85,7 @@ export default function Projects() {
             ))}
           </AnimatePresence>
         </motion.div>
+        </RevealOnScroll>
       </div>
 
       <style>{`

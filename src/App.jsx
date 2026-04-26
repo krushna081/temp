@@ -6,18 +6,22 @@
  */
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
+import { Suspense, lazy } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
+import { AnimatedBackground, ParticleBackground } from './components/AntiGravityLayers'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Experience from './components/Experience'
-import Terminal from './components/Terminal'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 import CursorCharacter from './components/CursorCharacter'
 import ScheduleButton from './components/ScheduleButton'
+import Footer from './components/Footer'
+
+// Lazy load heavy sections
+const About = lazy(() => import('./components/About'))
+const Projects = lazy(() => import('./components/Projects'))
+const Skills = lazy(() => import('./components/Skills'))
+const Experience = lazy(() => import('./components/Experience'))
+const Terminal = lazy(() => import('./components/Terminal'))
+const Contact = lazy(() => import('./components/Contact'))
 
 /* ---- Main Page ---- */
 function HomePage() {
@@ -26,12 +30,14 @@ function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Terminal />
-        <Contact />
+        <Suspense fallback={<div style={{ height: '50vh' }} />}>
+          <About />
+          <Projects />
+          <Skills />
+          <Experience />
+          <Terminal />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
     </>
@@ -42,6 +48,8 @@ function HomePage() {
 export default function App() {
   return (
     <ThemeProvider>
+      <AnimatedBackground />
+      <ParticleBackground />
       <CursorCharacter />
       <ScheduleButton />
       {/* HashRouter ensures GitHub Pages compatibility without server config */}

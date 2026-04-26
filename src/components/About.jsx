@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FiMapPin, FiMail, FiCode, FiBook, FiDownload } from 'react-icons/fi'
 import { personalInfo } from '../data'
+import { RevealOnScroll } from './AntiGravityLayers'
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -27,11 +28,12 @@ export default function About() {
   ]
 
   return (
-    <section id="about" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+    <section id="about" style={{ backgroundColor: 'transparent' }}>
       <div className="section-container" ref={ref}>
-        {/* Heading */}
-        <div className="divider-pill"><span>About Me</span></div>
-        <h2 className="section-title">Who I Am</h2>
+        <RevealOnScroll>
+          {/* Heading */}
+          <div className="divider-pill"><span>About Me</span></div>
+          <h2 className="section-title">Who I Am</h2>
         <p className="section-subtitle">
           A passionate developer building the future, one line at a time.
         </p>
@@ -170,6 +172,7 @@ export default function About() {
             </motion.div>
           </div>
         </div>
+        </RevealOnScroll>
       </div>
 
       <style>{`

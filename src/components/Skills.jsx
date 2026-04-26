@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { skills } from '../data'
+import { RevealOnScroll } from './AntiGravityLayers'
 
 const categoryMeta = {
   cybersecurity: { label: 'Cybersecurity', emoji: '🛡️', color: '#ef4444' },
@@ -24,9 +25,10 @@ export default function Skills() {
   const meta = categoryMeta[activeTab]
 
   return (
-    <section id="skills" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+    <section id="skills" style={{ backgroundColor: 'transparent' }}>
       <div className="section-container" ref={ref}>
-        <div className="divider-pill"><span>Skills</span></div>
+        <RevealOnScroll>
+          <div className="divider-pill"><span>Skills</span></div>
         <h2 className="section-title">My Tech Stack</h2>
         <p className="section-subtitle">
           Technologies I work with day-to-day, across the full development spectrum.
@@ -117,6 +119,7 @@ export default function Skills() {
             for the latest projects and contributions.
           </p>
         </motion.div>
+        </RevealOnScroll>
       </div>
 
       <style>{`

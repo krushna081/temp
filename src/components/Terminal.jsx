@@ -7,6 +7,8 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { personalInfo, projects } from '../data'
 
+import { RevealOnScroll } from './AntiGravityLayers'
+
 const COMMANDS = {
   help: 'list all available commands',
   about: 'show information about me',
@@ -143,21 +145,22 @@ export default function Terminal() {
   }
 
   return (
-    <section id="terminal" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section id="terminal" style={{ backgroundColor: 'transparent' }}>
       <div className="section-container" ref={ref}>
-        <div className="divider-pill"><span>Interactive</span></div>
-        <h2 className="section-title">Developer Terminal</h2>
-        <p className="section-subtitle">
-          Prefer the command line? Explore my portfolio using standard terminal commands.
-        </p>
+        <RevealOnScroll>
+          <div className="divider-pill"><span>Interactive</span></div>
+          <h2 className="section-title">Developer Terminal</h2>
+          <p className="section-subtitle">
+            Prefer the command line? Explore my portfolio using standard terminal commands.
+          </p>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="terminal-wrapper"
-          onClick={focusInput}
-        >
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="terminal-wrapper glass-card"
+            onClick={focusInput}
+          >
           {/* Mac-style Header */}
           <div className="terminal-header">
             <div className="terminal-dot red" />
@@ -204,6 +207,7 @@ export default function Terminal() {
             
           </div>
         </motion.div>
+        </RevealOnScroll>
       </div>
     </section>
   )

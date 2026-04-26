@@ -6,14 +6,16 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { experiences } from '../data'
+import { RevealOnScroll } from './AntiGravityLayers'
 
 export default function Experience() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="experience" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section id="experience" style={{ backgroundColor: 'transparent' }}>
       <div className="section-container" ref={ref}>
-        <div className="divider-pill"><span>Journey</span></div>
+        <RevealOnScroll>
+          <div className="divider-pill"><span>Journey</span></div>
         <h2 className="section-title">Experience & Achievements</h2>
         <p className="section-subtitle">
           Milestones, internships, and moments that shaped my career.
@@ -41,6 +43,7 @@ export default function Experience() {
             <TimelineItem key={i} exp={exp} index={i} inView={inView} isRight={i % 2 === 1} />
           ))}
         </div>
+        </RevealOnScroll>
       </div>
 
       <style>{`

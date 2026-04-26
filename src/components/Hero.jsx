@@ -9,6 +9,7 @@ import { Link } from 'react-scroll'
 import { FiArrowDown, FiDownload, FiGithub, FiLinkedin, FiTwitter, FiInstagram } from 'react-icons/fi'
 import { FaHtml5, FaCss3Alt, FaJs, FaPython, FaGitAlt, FaGithub, FaLinux } from 'react-icons/fa'
 import { personalInfo } from '../data'
+import { ParallaxWrapper, MagneticWrapper } from './AntiGravityLayers'
 
 /* Build the typing sequence from taglines array */
 function buildTypeSequence(taglines) {
@@ -59,20 +60,20 @@ export default function Hero() {
       <FloatingTechLogos />
 
       <div className="section-container" style={{ position: 'relative', zIndex: 1, paddingTop: '2rem', paddingBottom: '2rem' }}>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-          gap: '2.5rem',
-          maxWidth: '800px',
-          margin: '0 auto',
-        }}
-          className="hero-content"
-        >
-
-          {/* Left — Text Content */}
-          <div>
+        <ParallaxWrapper sensitivity={0.03}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            gap: '2.5rem',
+            maxWidth: '800px',
+            margin: '0 auto',
+          }}
+            className="hero-content"
+          >
+            {/* Left — Text Content */}
+            <div>
             {/* Greeting Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -164,18 +165,22 @@ export default function Hero() {
               transition={{ delay: 0.6 }}
               style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}
             >
-              <Link to="projects" smooth offset={-64} duration={600}>
-                <button className="btn-primary">
-                  View My Work <FiArrowDown />
-                </button>
-              </Link>
-              <a
-                href={personalInfo.resumeUrl}
-                download
-                className="btn-outline"
-              >
-                Download CV <FiDownload />
-              </a>
+              <MagneticWrapper>
+                <Link to="projects" smooth offset={-64} duration={600}>
+                  <button className="btn-primary">
+                    View My Work <FiArrowDown />
+                  </button>
+                </Link>
+              </MagneticWrapper>
+              <MagneticWrapper>
+                <a
+                  href={personalInfo.resumeUrl}
+                  download
+                  className="btn-outline"
+                >
+                  Download CV <FiDownload />
+                </a>
+              </MagneticWrapper>
             </motion.div>
 
             {/* Social Links */}
@@ -212,6 +217,7 @@ export default function Hero() {
             </motion.div>
           </div>
         </div>
+      </ParallaxWrapper>
 
         {/* Scroll indicator */}
         <motion.div
@@ -314,16 +320,20 @@ function FloatingTechLogos() {
             className="floating-logo-item"
             initial={{ opacity: 0 }}
             animate={{ 
-              opacity: 0.15, // Balanced visibility
+              opacity: 0.15,
               y: [0, -30, 0],
               x: [0, 15, -15, 0],
-              rotate: [0, 10, -10, 0]
+              rotate: [0, 10, -10, 0],
+              z: [0, 20, 0], // Simulating 3D depth
+              scale: [1, 1.1, 0.9, 1]
             }}
             transition={{
               opacity: { duration: 2 },
               y: { duration: 15 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay },
               x: { duration: 18 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay },
-              rotate: { duration: 20 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay }
+              rotate: { duration: 20 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay },
+              z: { duration: 12 + (i % 5) * 3, repeat: Infinity, ease: 'easeInOut', delay },
+              scale: { duration: 10 + (i % 5) * 4, repeat: Infinity, ease: 'easeInOut', delay }
             }}
             style={{
               position: 'absolute',
