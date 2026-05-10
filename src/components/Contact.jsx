@@ -32,14 +32,18 @@ export default function Contact() {
     
     setLoading(true)
     
-    try {
-      const formData = new FormData(e.target)
-      formData.append("access_key", "eaf7e2a1-5a48-43f3-9a21-ccb764a400e2")
+   try {
+  const formData = new FormData(e.target)
 
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      })
+  formData.append(
+    "access_key",
+    import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+  )
+
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: formData
+  })
 
       const data = await response.json()
       
