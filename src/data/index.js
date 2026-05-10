@@ -50,29 +50,29 @@ export const personalInfo = {
 
 /* ---- Projects / Research ---- */
 export const projects = [
-  {
-    id: 1,
-    title: 'Advanced Persistent Threat (APT) Detection Framework',
-    description: 'Problem: Traditional IDS fail to detect slow, sophisticated APTs.\n\nSolution: Developed an anomaly-based detection framework analyzing network traffic patterns.\n\nTechnology: Python, Scikit-Learn, Wireshark.\n\nImpact: Improved detection accuracy of stealthy anomalies by 24% in simulated environments.',
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80',
-    techStack: ['Python', 'Machine Learning', 'Network Security'],
-    category: 'Research',
-    github: 'https://github.com/krushna081',
-    live: '#',
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'Zero-Trust Architecture Implementation Guide',
-    description: 'Problem: Legacy network perimeters are vulnerable to internal lateral movement.\n\nSolution: Designed and documented a comprehensive Zero-Trust rollout strategy for mid-sized enterprises.\n\nTechnology: IAM, Micro-segmentation, MFA protocols.\n\nImpact: Authored a paper establishing practical migration steps minimizing operational downtime.',
-    image: 'https://images.unsplash.com/photo-1563206767-5b18f21fffb3?w=600&q=80',
-    techStack: ['Cybersecurity', 'Zero-Trust', 'Architecture'],
-    category: 'Research',
-    github: 'https://github.com/krushna081',
-    live: '#',
-    featured: true,
-  },
-  {
+   {
+  id: 1,
+  title: 'Full Stack Secure Chat Application Development',
+  description: 'Built a real-time secure chat application while learning modern full-stack development and deployment workflows.\n\nLearning Focus: Learned how to connect frontend and backend systems, manage MongoDB databases locally and on MongoDB Atlas, configure environment variables, integrate authentication and email services, and deploy applications to production.\n\nTechnologies Learned: React.js, Node.js, Express.js, MongoDB, Socket.io, Vercel, Render, Resend, JWT Authentication.\n\nDeployment & Backend Experience: Configured APIs, connected servers with databases, managed environment variables, tested REST APIs, handled CORS issues, and deployed frontend and backend services successfully.\n\nImpact: Gained practical experience in real-world MERN stack architecture, database management, server deployment, realtime communication, and production-level project structuring.',
+  image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80',
+  techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Socket.io'],
+  category: 'Full Stack Development',
+  github: 'https://github.com/krushna081/chat',
+  live: 'https://chat-khaki-two-48.vercel.app/',
+  featured: true,
+},
+{
+  id: 2,
+  title: 'End-to-End Encrypted Secure Messaging Platform',
+  description: 'Problem: Traditional messaging systems expose sensitive communication data to servers and third-party interception risks.\n\nSolution: Developed a secure real-time messaging platform implementing true end-to-end encryption with client-side cryptographic operations and zero-knowledge architecture.\n\nTechnology: AES-256-GCM, Web Crypto API, JWT Authentication, Socket.io, MongoDB, Zero-Knowledge Security.\n\nImpact: Engineered a cybersecurity-focused communication system ensuring encrypted message transmission, secure authentication, self-destructing messages, and protection against unauthorized data access.',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyBplxhLpuxaCeO8AuPDLNkpzxobKyqmBz4g&s',
+  techStack: ['Cybersecurity', 'E2EE', 'Encryption', 'Socket.io'],
+  category: 'Security Research',
+  github: 'https://github.com/krushna081/chat',
+  live: 'https://chat-khaki-two-48.vercel.app/',
+  featured: true,
+},
+  { 
     id: 3,
     title: 'Secure File Storage with AES-256 Encryption',
     description: 'Problem: Cloud storage lacks client-side encryption controls.\n\nSolution: Built a robust file-sharing platform that encrypts files locally before upload.\n\nTechnology: React, Node.js, WebCrypto API.\n\nImpact: Ensured end-to-end data confidentiality, preventing unauthorized server-side access.',
@@ -121,51 +121,51 @@ export const projects = [
 /* ---- Skills ---- */
 export const skills = {
   cybersecurity: [
-    { name: 'Network Security', level: 85 },
+    { name: 'Network Security', level: 80  },
     { name: 'Ethical Hacking', level: 80 },
     { name: 'Cryptography', level: 75 },
     { name: 'Vulnerability Assessment', level: 82 },
-    { name: 'Incident Response', level: 70 },
+    { name: 'Incident Response', level: 10 },
   ],
   programming: [
-    { name: 'Python', level: 90 },
-    { name: 'JavaScript / TypeScript', level: 85 },
-    { name: 'Bash Scripting', level: 78 },
-    { name: 'C / C++', level: 75 },
-    { name: 'Java', level: 70 },
+    { name: 'Python', level: 60 },
+    { name: 'JavaScript / TypeScript', level: 70 },
+    { name: 'Bash Scripting', level: 70 },
+    { name: 'C / C++', level: 80 },
+    { name: 'Java', level: 80 },
   ],
   aiml: [
-    { name: 'Machine Learning', level: 75 },
-    { name: 'Scikit-Learn', level: 80 },
-    { name: 'Anomaly Detection', level: 72 },
-    { name: 'Data Analysis', level: 85 },
+    { name: 'Machine Learning', level: 60 },
+    { name: 'Scikit-Learn', level: 65 },
+    { name: 'Anomaly Detection', level: 60 },
+    { name: 'Data Analysis', level: 70 },
   ],
   webdev: [
-    { name: 'React.js', level: 88 },
-    { name: 'Node.js / Express', level: 82 },
-    { name: 'REST APIs', level: 85 },
-    { name: 'Tailwind CSS', level: 80 },
+    { name: 'React.js', level: 80 },
+    { name: 'Node.js / Express', level: 70 },
+    { name: 'REST APIs', level: 70 },
+    { name: 'Tailwind CSS', level: 60 },
+    { name: 'Wordpress', level: 70},
   ],
   tools: [
-    { name: 'Wireshark / Nmap', level: 85 },
-    { name: 'Linux OS', level: 90 },
-    { name: 'Git / GitHub', level: 92 },
-    { name: 'Docker', level: 75 },
+    { name: 'Wireshark / Nmap', level: 50 },
+    { name: 'Linux OS', level: 30 },
+    { name: 'Git / GitHub', level: 70 },
+    { name: 'Docker', level: 30 },
   ],
 }
 
 export const experiences = [
-  {
-    type: 'experience',
-    title: 'Web Development Intern',
-    organization: 'Kumudini Infotech (Government of India Project)',
-    period: 'Sep 2025 – Present',
-    description: `• Designed and implemented responsive, mobile-first web capabilities using HTML, CSS, and JavaScript for a major Government of India project, resulting in extended digital outreach across underserved rural communities.
-• Collaborated actively within Agile development teams to map and deploy complex technical requirements, achieving accelerated deployment cycles and highly consistent code integration.
-• Engineered robust data handling logic and system efficiency upgrades, optimizing database interactions to deliver significantly faster front-end performance in low-bandwidth environments.
-• Enforced strict code quality standards through comprehensive testing and defensive programming, guaranteeing long-term scalability and strict system reliability across public-facing portals.`,
-    icon: '💻',
-  },
+{
+  type: 'experience',
+  title: 'Web Development Intern',
+  organization: 'Kumudini Infotech (Government of India Project)',
+  period: 'Sep 2025 – Present',
+  description: `• Worked on responsive web development using HTML, CSS, JavaScript, React.js, Node.js, and WordPress.
+• Learned SQL database management, Google Forms data handling, and backend integration.
+• Collaborated in team-based development and improved website performance and user experience.`,
+  icon: '💻',
+},
 
   {
     type: 'achievement',
@@ -194,13 +194,13 @@ export const experiences = [
       'Built secure web applications for local businesses, emphasizing data encryption, secure authentication (OAuth/JWT), and robust defensive coding practices.',
     icon: '🚀',
   },
-  {
-    type: 'achievement',
-    title: 'Research Paper Publication',
-    organization: 'Undergraduate Cybersecurity Journal',
-    period: 'May 2025',
-    description:
-      'Published academic research on "Evading Modern IDS Systems Using Polymorphic Traffic Attributes," detailing methodologies and defensive countermeasures.',
-    icon: '📄',
-  },
+ {
+  type: '#',
+  title: 'Upcoming Research Paper on Dark Web',
+  organization: 'Research Project',
+  period: '2026',
+  description:
+    'Working on an upcoming cybersecurity research paper on Dark Web analysis and security concepts with a research team member.',
+  icon: '📄',
+},
 ]
