@@ -90,7 +90,10 @@ export default function FloatingTechIcons({ gravityEnabled }) {
 
   if (gravityEnabled && !prevGravity.current && icons.length > 0) {
     posRef.current = icons.map(icon => ({ left: icon.leftPct, top: icon.topPct }))
-    velRef.current = icons.map(() => ({ vx: 0, vy: 0 }))
+    velRef.current = icons.map(() => ({
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2,
+    }))
   }
   prevGravity.current = gravityEnabled
 
@@ -154,13 +157,13 @@ export default function FloatingTechIcons({ gravityEnabled }) {
         const vel = velRef.current[i]
         if (!vel) return
 
-        vel.vx += ax * 0.3
-        vel.vy += ay * 0.3
-        vel.vx *= 0.88
-        vel.vy *= 0.88
+        vel.vx += ax * 0.04 + (Math.random() - 0.5) * 0.02
+        vel.vy += ay * 0.04 + (Math.random() - 0.5) * 0.02
+        vel.vx *= 0.97
+        vel.vy *= 0.97
 
-        pos.left += vel.vx * 0.5
-        pos.top += vel.vy * 0.5
+        pos.left += vel.vx * 0.4
+        pos.top += vel.vy * 0.4
 
         if (pos.left <= 0 || pos.left >= 100) vel.vx *= -0.4
         if (pos.top <= 0 || pos.top >= 100) vel.vy *= -0.4
