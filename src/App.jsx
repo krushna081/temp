@@ -18,6 +18,7 @@ import CollaborationHub from './components/CollaborationHub'
 import BrutalistFooter from './components/BrutalistFooter'
 import ThemeToggle from './components/ThemeToggle'
 import GravityToggle from './components/GravityToggle'
+import PixelHacker from './components/PixelHacker'
 import ScheduleMeetingButton from './components/ScheduleMeetingButton'
 import MeetingPopup from './components/MeetingPopup'
 
@@ -45,6 +46,7 @@ function HomePage() {
       <MobileCommandBar />
       <ThemeToggle />
       <GravityToggle gravityEnabled={gravityEnabled} onToggle={() => setGravityEnabled(p => !p)} />
+      <PixelHacker />
       <ScheduleMeetingButton />
     </>
   )

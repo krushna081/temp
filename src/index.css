@@ -544,3 +544,48 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 }
+
+/* ── Pixel Hacker Animations ── */
+@keyframes walkBob0 {
+  0%, 100% { transform: translateY(0); }
+}
+
+@keyframes walkBob1 {
+  0%, 100% { transform: translateY(-1px); }
+}
+
+@keyframes idleBreathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+
+@keyframes waveArm {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+@keyframes pointArm {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-45deg); }
+}
+
+@keyframes clickJump {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-16px); opacity: 0; }
+}
+
+@keyframes clickFlash {
+  0% { opacity: 0.5; transform: scaleX(0.8); }
+  100% { opacity: 0; transform: scaleX(1.2); }
+}
+
+@keyframes clickPoint {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(12px); opacity: 0; }
+}
+
+@keyframes hoverRing {
+  0% { transform: scale(0.95); opacity: 0.25; }
+  50% { transform: scale(1.05); opacity: 0.15; }
+  100% { transform: scale(0.95); opacity: 0.25; }
+}
