@@ -1,66 +1,68 @@
-/**
- * App.jsx
- * Root component — wraps everything with ThemeProvider,
- * sets up HashRouter for GitHub Pages compatibility,
- * and assembles all page sections.
- */
+import { Suspense, lazy, useState } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
-import { Suspense, lazy } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
-import { AnimatedBackground, ParticleBackground } from './components/AntiGravityLayers'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import CursorCharacter from './components/CursorCharacter'
-import ScheduleButton from './components/ScheduleButton'
-import Footer from './components/Footer'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
-// Lazy load heavy sections
-const About = lazy(() => import('./components/About'))
-const Projects = lazy(() => import('./components/Projects'))
-const Skills = lazy(() => import('./components/Skills'))
-const Experience = lazy(() => import('./components/Experience'))
+import FloatingTechIcons from './components/FloatingTechIcons'
+import { showFloatingIcons } from './config'
+
+import MobileCommandBar from './components/MobileCommandBar'
+import DigitalIdentity from './components/DigitalIdentity'
+import FeaturedProjects from './components/FeaturedProjects'
+import WhoAmI from './components/WhoAmI'
+import CyberCommandCenter from './components/CyberCommandCenter'
+import CareerJourney from './components/CareerJourney'
+import ResearchLab from './components/ResearchLab'
+import CollaborationHub from './components/CollaborationHub'
+import BrutalistFooter from './components/BrutalistFooter'
+import ThemeToggle from './components/ThemeToggle'
+import GravityToggle from './components/GravityToggle'
+import ScheduleMeetingButton from './components/ScheduleMeetingButton'
+import MeetingPopup from './components/MeetingPopup'
+
+import { TerminalSkeleton } from './components/Skeletons'
+
 const Terminal = lazy(() => import('./components/Terminal'))
-const Contact = lazy(() => import('./components/Contact'))
 
-/* ---- Main Page ---- */
 function HomePage() {
+  const [gravityEnabled, setGravityEnabled] = useState(false)
+
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Suspense fallback={<div style={{ height: '50vh' }} />}>
-          <About />
-          <Projects />
-          <Skills />
-          <Experience />
-          <Terminal />
-          <Contact />
-        </Suspense>
-      </main>
-      <Footer />
+      {showFloatingIcons && <FloatingTechIcons gravityEnabled={gravityEnabled} />}
+      <DigitalIdentity />
+      <FeaturedProjects />
+      <WhoAmI />
+      <CyberCommandCenter />
+      <CareerJourney />
+      <ResearchLab />
+      <Suspense fallback={<TerminalSkeleton />}>
+        <Terminal />
+      </Suspense>
+      <CollaborationHub />
+      <BrutalistFooter />
+      <MobileCommandBar />
+      <ThemeToggle />
+      <GravityToggle gravityEnabled={gravityEnabled} onToggle={() => setGravityEnabled(p => !p)} />
+      <ScheduleMeetingButton />
     </>
   )
 }
 
-/* ---- App Root ---- */
 export default function App() {
   return (
     <ThemeProvider>
-      <AnimatedBackground />
-      <ParticleBackground />
-      <CursorCharacter />
-      <ScheduleButton />
-      {/* HashRouter ensures GitHub Pages compatibility without server config */}
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          {/* Catch-all redirects to home */}
-          <Route path="*" element={<HomePage />} />
-        </Routes>
-      </HashRouter>
-      <Analytics />
+      <SkeletonTheme baseColor="var(--text-muted)" highlightColor="var(--accent)">
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<HomePage />} />
+          </Routes>
+        </HashRouter>
+        <MeetingPopup />
+        <Analytics />
+      </SkeletonTheme>
     </ThemeProvider>
   )
 }
