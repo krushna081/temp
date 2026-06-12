@@ -17,6 +17,8 @@ const contactCards = [
   { icon: <FiLinkedin size={18} />, label: 'LinkedIn', value: 'Connect with me', href: personalInfo.linkedin },
 ]
 
+const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+
 export default function CollaborationHub() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [errors, setErrors] = useState({})
@@ -37,9 +39,17 @@ export default function CollaborationHub() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setLoading(true)
     try {
-      const formData = new FormData(e.target)
-      formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
-      const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData })
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          name: form.name,
+          email: form.email,
+          subject: form.subject || 'New Portfolio Message',
+          message: form.message,
+        }),
+      })
       const data = await response.json()
       setLoading(false)
       if (data.success) {
