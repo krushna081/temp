@@ -30,7 +30,7 @@ export const personalInfo = {
       degree: 'BSc in Cyber & Digital Science',
       institution: 'K.K. Wagh ',
       year: 'April 2025– July 2028',
-      grade: 'CGPA: not yet',
+      grade: 'CGPA: 7.00',
     },
     {
       degree: 'Higher Secondary (12th) — Science',
