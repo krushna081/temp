@@ -1,6 +1,7 @@
 import { Suspense, lazy, useState } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { ThemeProvider } from './context/ThemeContext'
 import { SkeletonTheme } from 'react-loading-skeleton'
 
@@ -64,6 +65,7 @@ export default function App() {
         </HashRouter>
         <MeetingPopup />
         <Analytics />
+        <SpeedInsights />
       </SkeletonTheme>
     </ThemeProvider>
   )
