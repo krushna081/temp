@@ -8,6 +8,10 @@ import {
   SiTypescript, SiMongodb, SiTailwindcss, SiFigma, SiNextdotjs,
 } from 'react-icons/si'
 
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 function hexToLuminance(hex) {
   const r = parseInt(hex.slice(1, 3), 16) / 255
   const g = parseInt(hex.slice(3, 5), 16) / 255
@@ -189,7 +193,7 @@ export default function FloatingTechIcons({ gravityEnabled }) {
   }, [gravityEnabled, icons.length])
 
   const rendered = useMemo(() => {
-    if (icons.length === 0) return null
+    if (icons.length === 0 || prefersReducedMotion) return null
 
     return (
       <div style={{

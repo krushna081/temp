@@ -1,83 +1,67 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { experiences } from '../data'
-import useAutoScroll from './useAutoScroll'
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-30px' },
+  transition: { duration: 0.45, ease: 'easeOut' },
+}
 
 function extractYear(period) {
   const match = period.match(/(\d{4})/)
-  return match ? parseInt(match[1]) : 2025
-}
-
-const yearColors = {
-  2023: 'var(--accent-coral)',
-  2024: 'var(--accent-alt)',
-  2025: 'var(--accent-green)',
-  2026: 'var(--accent-yellow)',
-}
-
-function getYearColor(year) {
-  const keys = Object.keys(yearColors).sort((a, b) => b - a)
-  for (const k of keys) {
-    if (year >= parseInt(k)) return yearColors[k]
-  }
-  return yearColors['2026']
+  return match ? parseInt(match[1], 10) : 2025
 }
 
 export default function CareerJourney() {
-  const [selected, setSelected] = useState(null)
-
-  const grouped = [...experiences].sort((a, b) => extractYear(b.period) - extractYear(a.period))
-
-  const roadmapRef = useAutoScroll({ speed: 0.3, mobileOnly: false })
+  const items = [...experiences].sort((a, b) => extractYear(b.period) - extractYear(a.period))
 
   return (
-    <section id="journey" style={{ background: 'var(--bg-primary)', borderTop: '3px solid var(--border)' }}>
-      <div className="section-container">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="section-label">Journey</div>
-          <h2 className="section-title">Career Timeline</h2>
+    <section id="journey" style={{ background: 'var(--color-bg-alt)', borderTop: '3px solid var(--color-border)' }}>
+      <div className="container-x section">
+        <motion.header {...reveal}>
+          <p className="section-label">05 — Journey</p>
+          <h2 className="section-title">Career <span className="tint">Timeline</span></h2>
           <p className="section-subtitle">Milestones, internships, and achievements that shaped my path.</p>
-        </motion.div>
+        </motion.header>
 
-        <div ref={roadmapRef} className="roadmap-scroll" style={{ scrollBehavior: 'smooth' }}>
-          {grouped.map((exp, i) => {
-            const year = extractYear(exp.period)
-            const color = getYearColor(year)
-            const isSelected = selected === i
-
-            return (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                onClick={() => setSelected(isSelected ? null : i)}
-                className="brutal-card"
-                style={{
-                  padding: '1.25rem',
-                  cursor: 'pointer',
-                  borderTop: `6px solid ${color}`,
-                  minHeight: isSelected ? 'auto' : 180,
-                  transition: 'min-height 0.2s ease',
+        <ol className="timeline">
+          {items.map((exp, i) => (
+            <li key={`${exp.title}-${exp.period}`} className="timeline-item">
+              <span className="timeline-node" aria-hidden="true" />
+              <motion.div {...reveal} transition={{ ...reveal.transition, delay: Math.min(i * 0.07, 0.35) }}
+                className="brutal-card lift"
+                style={{ padding: '1.25rem' }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  flexWrap: 'wrap',
+                  gap: '0.4rem 0.75rem',
+                  marginBottom: '0.65rem',
                 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', padding: '0.2rem 0.5rem', border: '2px solid var(--border)', background: color, color: '#fff' }}>{exp.type === 'experience' ? '💼 Work' : '🏆 Award'}</span>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)' }}>{exp.period}</span>
+                  <span className="brutal-tag" style={{
+                    background: exp.type === 'experience' ? 'var(--color-secondary)' : 'var(--color-primary)',
+                    color: exp.type === 'experience' ? '#F5F1E8' : 'var(--color-fg)',
+                  }}>
+                    {exp.type === 'experience' ? 'Work' : 'Achievement'}
+                  </span>
+                  <span className="mono-meta">{exp.period}</span>
                 </div>
 
-                <h3 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '0.2rem', color: 'var(--text-primary)' }}>{exp.title}</h3>
-                <p style={{ fontSize: '0.8rem', fontWeight: 600, color: color, marginBottom: '0.5rem' }}>{exp.organization}</p>
-
-                <motion.p animate={{ height: isSelected ? 'auto' : 0, opacity: isSelected ? 1 : 0 }}
-                  style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.6, overflow: 'hidden', whiteSpace: 'pre-wrap' }}>
-                  {exp.description}
-                </motion.p>
-
-                {!isSelected && (
-                  <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600, marginTop: '0.5rem' }}>
-                    Tap to expand ▾
+                <h3 style={{ fontSize: '1.15rem', marginBottom: '0.15rem' }}>{exp.title}</h3>
+                {exp.organization && (
+                  <p style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-fg-2)', marginBottom: '0.55rem' }}>
+                    {exp.organization}
                   </p>
                 )}
+                <p style={{ fontSize: '0.88rem', color: 'var(--color-fg-2)', lineHeight: 1.65, whiteSpace: 'pre-line' }}>
+                  {exp.description}
+                </p>
               </motion.div>
-            )
-          })}
-        </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )

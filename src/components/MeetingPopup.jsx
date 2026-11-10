@@ -126,9 +126,9 @@ export default function MeetingPopup() {
                 style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
                   width: '100%', minHeight: 48, padding: '0.7rem 1rem',
-                  border: '3px solid #000', background: 'var(--accent)', color: '#fff',
+                  border: '3px solid var(--color-border)', background: 'var(--color-primary)', color: 'var(--color-fg)',
                   fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer',
-                  boxShadow: '4px 4px 0px #000', textTransform: 'uppercase', letterSpacing: '0.03em',
+                  boxShadow: '4px 4px 0px var(--shadow)', textTransform: 'uppercase', letterSpacing: '0.03em',
                 }}>
                 <FiCalendar size={18} /> Schedule Meeting
               </button>

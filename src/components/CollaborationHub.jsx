@@ -1,20 +1,30 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiSend, FiCheckCircle, FiCalendar, FiBriefcase, FiCode, FiUsers } from 'react-icons/fi'
+import {
+  FiBriefcase, FiCalendar, FiCheckCircle, FiCode, FiGithub, FiLinkedin,
+  FiMail, FiMapPin, FiSend, FiUsers,
+} from 'react-icons/fi'
 import { personalInfo } from '../data'
 
-const opportunities = [
-  { icon: <FiBriefcase size={20} />, title: 'Freelance', desc: 'Available for web dev & security projects', color: 'var(--accent)' },
-  { icon: <FiCode size={20} />, title: 'Internship', desc: 'Open to cybersecurity & dev roles', color: 'var(--accent-alt)' },
-  { icon: <FiUsers size={20} />, title: 'Open Source', desc: 'Contributing to security tools', color: 'var(--accent-green)' },
-  { icon: <FiCalendar size={20} />, title: 'Hackathons', desc: 'Always looking for teams', color: 'var(--accent-yellow)' },
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-30px' },
+  transition: { duration: 0.45, ease: 'easeOut' },
+}
+
+const OPPORTUNITIES = [
+  { icon: <FiBriefcase size={20} aria-hidden="true" />, title: 'Freelance', desc: 'Available for web dev & security projects', color: '#E65B36' },
+  { icon: <FiCode size={20} aria-hidden="true" />, title: 'Internship', desc: 'Open to cybersecurity & dev roles', color: '#174F50' },
+  { icon: <FiUsers size={20} aria-hidden="true" />, title: 'Open Source', desc: 'Contributing to security tools', color: '#A4A58C' },
+  { icon: <FiCalendar size={20} aria-hidden="true" />, title: 'Hackathons', desc: 'Always looking for teams', color: '#174F50' },
 ]
 
-const contactCards = [
-  { icon: <FiMail size={18} />, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
-  { icon: <FiMapPin size={18} />, label: 'Location', value: personalInfo.location, href: null },
-  { icon: <FiGithub size={18} />, label: 'GitHub', value: '@krushna081', href: personalInfo.github },
-  { icon: <FiLinkedin size={18} />, label: 'LinkedIn', value: 'Connect with me', href: personalInfo.linkedin },
+const CONTACT_CARDS = [
+  { icon: <FiMail size={18} aria-hidden="true" />, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
+  { icon: <FiMapPin size={18} aria-hidden="true" />, label: 'Location', value: personalInfo.location, href: null },
+  { icon: <FiGithub size={18} aria-hidden="true" />, label: 'GitHub', value: '@krushna081', href: personalInfo.github },
+  { icon: <FiLinkedin size={18} aria-hidden="true" />, label: 'LinkedIn', value: 'Connect with me', href: personalInfo.linkedin },
 ]
 
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
@@ -70,59 +80,78 @@ export default function CollaborationHub() {
   }
 
   return (
-    <section id="collab" style={{ background: 'var(--bg-primary)', borderTop: '3px solid var(--border)' }}>
-      <div className="section-container">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="section-label">Connect</div>
-          <h2 className="section-title">Collaboration Hub</h2>
-          <p className="section-subtitle">Let's build something together.</p>
-        </motion.div>
+    <section id="collab" className="on-accent" style={{
+      background: 'var(--color-primary)',
+      borderTop: '3px solid var(--color-border)',
+    }}>
+      <div className="container-x section">
+        <motion.header {...reveal}>
+          <p className="section-label" style={{ background: 'var(--color-fg)' }}>07 — Connect</p>
+          <h2 className="section-title" style={{ color: 'var(--color-fg)' }}>
+            Collaboration <span style={{ color: '#F5F1E8' }}>Hub</span>
+          </h2>
+          <p className="section-subtitle" style={{ color: 'var(--color-fg)' }}>
+            Let's build something together.
+          </p>
+        </motion.header>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '2rem' }}>
-          {opportunities.map((opp, i) => (
-            <motion.div key={opp.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-              className="brutal-card opp-card" style={{ padding: '1rem', textAlign: 'center' }}
+        <motion.div {...reveal}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem', marginBottom: '2rem' }}>
+          {OPPORTUNITIES.map((opp, i) => (
+            <motion.div key={opp.title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: Math.min(i * 0.07, 0.28), duration: 0.4, ease: 'easeOut' }}
+              className="brutal-card lift"
+              style={{ padding: '1rem', textAlign: 'center', cursor: 'pointer' }}
               onClick={() => document.getElementById('collab-form')?.scrollIntoView({ behavior: 'smooth' })}>
               <div style={{ color: opp.color, marginBottom: '0.35rem' }}>{opp.icon}</div>
-              <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.2rem' }}>{opp.title}</h4>
-              <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 500 }}>{opp.desc}</p>
+              <h3 style={{ fontSize: '0.92rem', marginBottom: '0.2rem' }}>{opp.title}</h3>
+              <p style={{ fontSize: '0.72rem', color: 'var(--color-fg-2)', fontWeight: 500 }}>{opp.desc}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.5rem' }} className="collab-grid">
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <div className="brutal-card" style={{ padding: '1.25rem', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Let's work together</h3>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '1rem' }}>
+        <div className="collab-split">
+          <motion.div {...reveal}>
+            <div className="brutal-card" style={{ padding: '1.35rem', marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.05rem', marginBottom: '0.5rem' }}>Let's work together</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-fg-2)', lineHeight: 1.65, marginBottom: '1rem' }}>
                 I'm open to freelance projects, internships, full-time roles, and research collaborations.
               </p>
               <a href="https://calendly.com/krushnacjadhav0807" target="_blank" rel="noopener noreferrer"
-                className="brutal-btn brutal-btn-green" style={{ width: '100%', justifyContent: 'center', fontSize: '0.85rem' }}>
-                <FiCalendar size={16} /> Schedule a Meeting
+                className="brutal-btn brutal-btn-alt"
+                style={{ width: '100%', justifyContent: 'center', fontSize: '0.85rem' }}>
+                <FiCalendar size={16} aria-hidden="true" /> Schedule a Meeting
               </a>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {contactCards.map((c, i) => (
-                <motion.div key={c.label} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                  className="brutal-card" style={{ padding: '0.85rem 1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              {CONTACT_CARDS.map((c, i) => (
+                <motion.div key={c.label}
+                  initial={{ opacity: 0, x: -18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: Math.min(i * 0.06, 0.25), duration: 0.4, ease: 'easeOut' }}
+                  className="brutal-card"
+                  style={{ padding: '0.85rem 1rem' }}>
                   {c.href ? (
-                    <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      <span style={{ color: 'var(--accent)' }}>{c.icon}</span>
-                      <div>
-                        <p style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{c.label}</p>
-                        <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>{c.value}</p>
-                      </div>
+                    <a href={c.href} target="_blank" rel="noopener noreferrer"
+                      style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.75rem', minHeight: 44 }}>
+                      <span style={{ color: 'var(--color-secondary)', flexShrink: 0 }}>{c.icon}</span>
+                      <span>
+                        <span className="stat-label" style={{ display: 'block' }}>{c.label}</span>
+                        <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-fg)', overflowWrap: 'anywhere' }}>{c.value}</span>
+                      </span>
                     </a>
                   ) : (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      <span style={{ color: 'var(--accent)' }}>{c.icon}</span>
-                      <div>
-                        <p style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{c.label}</p>
-                        <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>{c.value}</p>
-                      </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minHeight: 44 }}>
+                      <span style={{ color: 'var(--color-secondary)', flexShrink: 0 }}>{c.icon}</span>
+                      <span>
+                        <span className="stat-label" style={{ display: 'block' }}>{c.label}</span>
+                        <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-fg)' }}>{c.value}</span>
+                      </span>
                     </div>
                   )}
                 </motion.div>
@@ -130,20 +159,26 @@ export default function CollaborationHub() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} id="collab-form">
+          <motion.div {...reveal} id="collab-form">
             <div className="brutal-card" style={{ padding: '1.5rem' }}>
               {submitted ? (
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: '2rem 1rem' }}>
-                  <FiCheckCircle size={48} style={{ color: 'var(--accent-green)', marginBottom: '0.75rem' }} />
-                  <h3 style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Message Sent!</h3>
-                  <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>I'll get back to you within 24 hours.</p>
-                  <button onClick={() => setSubmitted(false)} className="brutal-btn">Send Another</button>
+                <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }}
+                  style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+                  <FiCheckCircle size={48} aria-hidden="true"
+                    style={{ color: 'var(--color-secondary)', margin: '0 auto 0.75rem' }} />
+                  <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Message Sent!</h3>
+                  <p style={{ color: 'var(--color-fg-2)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+                    I'll get back to you within 24 hours.
+                  </p>
+                  <button type="button" onClick={() => setSubmitted(false)} className="brutal-btn">
+                    Send Another
+                  </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1.25rem', color: 'var(--text-primary)' }}>Send a Message</h3>
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '1.25rem' }}>Send a Message</h3>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div className="form-row-2" style={{ display: 'grid', gap: '0.75rem', marginBottom: '0.75rem' }}>
                     <FormField label="Name" name="name" placeholder="John Doe" value={form.name} onChange={handleChange} error={errors.name} />
                     <FormField label="Email" name="email" type="email" placeholder="john@example.com" value={form.email} onChange={handleChange} error={errors.email} />
                   </div>
@@ -155,52 +190,40 @@ export default function CollaborationHub() {
                     onChange={handleChange} error={errors.message} isTextarea style={{ marginBottom: '1.25rem' }} />
 
                   <button type="submit" disabled={loading}
-                    className="brutal-btn brutal-btn-primary" style={{ width: '100%', justifyContent: 'center', opacity: loading ? 0.7 : 1 }}>
-                    {loading ? 'Sending...' : <><FiSend size={16} /> Send Message</>}
+                    className="brutal-btn brutal-btn-primary"
+                    style={{ width: '100%', justifyContent: 'center', opacity: loading ? 0.7 : 1 }}>
+                    {loading ? 'Sending...' : <><FiSend size={16} aria-hidden="true" /> Send Message</>}
                   </button>
                 </form>
               )}
             </div>
           </motion.div>
         </div>
-
-        <style>{`
-          .collab-grid { grid-template-columns: 1fr 1.2fr; }
-          @media (max-width: 768px) { .collab-grid { grid-template-columns: 1fr !important; } }
-        `}</style>
       </div>
     </section>
   )
 }
 
-function FormField({ label, name, placeholder, value, onChange, error, type = 'text', isTextarea = false, style = {} }) {
-  const base = {
-    width: '100%',
-    padding: '0.65rem 0.8rem',
-    border: '3px solid var(--border)',
-    background: 'var(--bg-secondary)',
-    color: 'var(--text-primary)',
-    fontSize: '0.85rem',
-    outline: 'none',
-    fontFamily: 'var(--font-sans)',
-    fontWeight: 600,
-    borderRadius: 0,
-    boxShadow: error ? '4px 4px 0px var(--accent-coral)' : 'none',
-    minHeight: isTextarea ? '100px' : undefined,
-    resize: isTextarea ? 'vertical' : undefined,
-  }
+function FormField({ label, name, placeholder, value, onChange, error, type = 'text', isTextarea = false, style }) {
+  const inputClass = `field-input${error ? ' field-error' : ''}`
 
   return (
     <div style={style}>
-      <label style={{ display: 'block', marginBottom: '0.3rem', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+      <label htmlFor={name} className="stat-label" style={{ display: 'block', marginBottom: '0.3rem', color: 'var(--color-fg-2)' }}>
         {label}
       </label>
       {isTextarea ? (
-        <textarea name={name} placeholder={placeholder} value={value} onChange={onChange} style={base} />
+        <textarea id={name} name={name} placeholder={placeholder} value={value} onChange={onChange}
+          className={inputClass} aria-invalid={!!error} rows={5} style={{ resize: 'vertical' }} />
       ) : (
-        <input type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} style={base} />
+        <input id={name} type={type} name={name} placeholder={placeholder} value={value} onChange={onChange}
+          className={inputClass} aria-invalid={!!error} />
       )}
-      {error && <p style={{ color: 'var(--accent-coral)', fontSize: '0.7rem', fontWeight: 600, marginTop: '0.2rem' }}>{error}</p>}
+      {error && (
+        <p role="alert" style={{ color: 'var(--color-primary)', fontSize: '0.7rem', fontWeight: 600, marginTop: '0.25rem' }}>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

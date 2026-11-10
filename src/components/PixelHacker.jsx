@@ -10,20 +10,20 @@ const DESKTOP_MIN_WIDTH = 1024
 
 const SECTIONS = [
   'featured-projects',
-  'cyber-command',
-  'career-journey',
-  'research-lab',
+  'command-center',
+  'journey',
+  'research',
   'collab',
 ]
 
 function getAccent(isDark) {
-  return isDark ? '#3B82F6' : '#FF6B35'
+  return isDark ? '#58A7A3' : '#E65B36'
 }
 
 function getCharacterAccents(isDark) {
   return {
     skin: isDark ? '#C0956A' : '#D4A574',
-    visor: isDark ? '#3B82F6' : '#FF6B35',
+    visor: isDark ? '#58A7A3' : '#E65B36',
     hoodie: isDark ? '#1A3048' : '#2A2A2A',
     pants: isDark ? '#0E1F30' : '#1A1A1A',
     backpack: isDark ? '#2A4060' : '#444',

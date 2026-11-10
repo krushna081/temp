@@ -118,41 +118,64 @@ export const projects = [
   },
 ]
 
-/* ---- Skills ---- */
+/* ---- Skills ----
+ * Same skills and proficiency levels as before,
+ * reorganized into presentation categories (no invented data).
+ */
 export const skills = {
-  cybersecurity: [
-    { name: 'Network Security', level: 80  },
-    { name: 'Ethical Hacking', level: 80 },
-    { name: 'Cryptography', level: 75 },
-    { name: 'Vulnerability Assessment', level: 82 },
-    { name: 'Incident Response', level: 10 },
-  ],
-  programming: [
-    { name: 'Python', level: 60 },
-    { name: 'JavaScript / TypeScript', level: 70 },
-    { name: 'Bash Scripting', level: 70 },
-    { name: 'C / C++', level: 80 },
-    { name: 'Java', level: 80 },
-  ],
-  aiml: [
-    { name: 'Machine Learning', level: 60 },
-    { name: 'Scikit-Learn', level: 65 },
-    { name: 'Anomaly Detection', level: 60 },
-    { name: 'Data Analysis', level: 70 },
-  ],
-  webdev: [
-    { name: 'React.js', level: 80 },
-    { name: 'Node.js / Express', level: 70 },
-    { name: 'REST APIs', level: 70 },
-    { name: 'Tailwind CSS', level: 60 },
-    { name: 'Wordpress', level: 70},
-  ],
-  tools: [
-    { name: 'Wireshark / Nmap', level: 50 },
-    { name: 'Linux OS', level: 30 },
-    { name: 'Git / GitHub', level: 70 },
-    { name: 'Docker', level: 30 },
-  ],
+  programming: {
+    label: 'Programming Languages',
+    items: [
+      { name: 'Python', level: 60 },
+      { name: 'JavaScript / TypeScript', level: 70 },
+      { name: 'Bash Scripting', level: 70 },
+      { name: 'C / C++', level: 80 },
+      { name: 'Java', level: 80 },
+    ],
+  },
+  frontend: {
+    label: 'Frontend Development',
+    items: [
+      { name: 'React.js', level: 80 },
+      { name: 'Tailwind CSS', level: 60 },
+    ],
+  },
+  backend: {
+    label: 'Backend Development',
+    items: [
+      { name: 'Node.js / Express', level: 70 },
+      { name: 'REST APIs', level: 70 },
+    ],
+  },
+  cybersecurity: {
+    label: 'Cybersecurity',
+    items: [
+      { name: 'Network Security', level: 80 },
+      { name: 'Ethical Hacking', level: 80 },
+      { name: 'Cryptography', level: 75 },
+      { name: 'Vulnerability Assessment', level: 82 },
+      { name: 'Incident Response', level: 10 },
+    ],
+  },
+  tools: {
+    label: 'Development Tools',
+    items: [
+      { name: 'Git / GitHub', level: 70 },
+      { name: 'Wireshark / Nmap', level: 50 },
+      { name: 'Linux OS', level: 30 },
+      { name: 'Docker', level: 30 },
+    ],
+  },
+  other: {
+    label: 'Other Technologies',
+    items: [
+      { name: 'Machine Learning', level: 60 },
+      { name: 'Scikit-Learn', level: 65 },
+      { name: 'Anomaly Detection', level: 60 },
+      { name: 'Data Analysis', level: 70 },
+      { name: 'Wordpress', level: 70 },
+    ],
+  },
 }
 
 export const experiences = [

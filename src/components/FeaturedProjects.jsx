@@ -1,97 +1,162 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiGithub, FiExternalLink, FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { projects } from '../data'
+import { FiChevronDown, FiExternalLink, FiGithub } from 'react-icons/fi'
+import { personalInfo, projects } from '../data'
 
-const categories = ['All', 'Cybersecurity', 'Research', 'Development']
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-30px' },
+  transition: { duration: 0.45, ease: 'easeOut' },
+}
+
+const FILTERS = [
+  'All',
+  'Full Stack Development',
+  'Cybersecurity',
+  'Security Research',
+  'Development',
+  'Research',
+]
+
+/* Show the first batch of projects immediately; a future-proof
+   "Load More" appears only when the data set grows. */
+const INITIAL_VISIBLE = 6
 
 export default function FeaturedProjects() {
   const [activeFilter, setActiveFilter] = useState('All')
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE)
   const [expanded, setExpanded] = useState(null)
 
-  const filtered = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter)
+  const filtered = activeFilter === 'All'
+    ? projects
+    : projects.filter(p => p.category === activeFilter)
+
+  const visible = filtered.slice(0, visibleCount)
+  const hasMore = filtered.length > visibleCount
 
   return (
-    <section id="featured-projects" style={{ background: 'var(--bg-primary)', borderTop: '3px solid var(--border)' }}>
-      <div className="section-container">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="section-label">Portfolio</div>
-          <h2 className="section-title">Featured Projects</h2>
+    <section id="featured-projects" style={{ background: 'var(--color-bg)', borderTop: '3px solid var(--color-border)' }}>
+      <div className="container-x section">
+        <motion.header {...reveal}>
+          <p className="section-label">02 — Portfolio</p>
+          <h2 className="section-title">Featured <span className="tint">Projects</span></h2>
           <p className="section-subtitle">Real-world builds — from secure apps to security tools.</p>
-        </motion.div>
+        </motion.header>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '2rem' }}>
-          {categories.map(cat => (
-            <button key={cat} onClick={() => setActiveFilter(cat)}
-              style={{
-                padding: '0.5rem 1.2rem', minHeight: 44,
-                fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.04em',
-                cursor: 'pointer',
-                border: '3px solid var(--border)',
-                background: activeFilter === cat ? 'var(--accent)' : 'var(--bg-card)',
-                color: activeFilter === cat ? '#fff' : 'var(--text-primary)',
-                boxShadow: activeFilter === cat ? '4px 4px 0px var(--shadow)' : 'none',
-                transition: 'all 0.1s ease',
-              }}>
+        <motion.div {...reveal} className="filter-row" role="group" aria-label="Filter projects by category">
+          {FILTERS.map(cat => (
+            <button
+              key={cat}
+              type="button"
+              className="filter-btn"
+              aria-pressed={activeFilter === cat}
+              onClick={() => { setActiveFilter(cat); setVisibleCount(INITIAL_VISIBLE) }}
+            >
               {cat}
             </button>
           ))}
         </motion.div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div className="project-grid">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => {
+            {visible.map((project, i) => {
               const isExpanded = expanded === project.id
               return (
-                <motion.div key={project.id} layout
-                  initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                  className="brutal-card"
-                  style={{ overflow: 'hidden', cursor: 'pointer' }}
-                  onClick={() => setExpanded(isExpanded ? null : project.id)}>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ position: 'relative' }}>
-                      <img src={project.image} alt={project.title}
-                        style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block', borderBottom: '3px solid var(--border)' }}
-                        loading="lazy" />
-                      <div style={{ position: 'absolute', top: 10, left: 10, display: 'flex', gap: '0.4rem' }}>
-                        <span className="brutal-tag" style={{ background: 'var(--accent)', color: '#fff', border: '2px solid #000' }}>{project.category}</span>
-                        {project.featured && <span className="brutal-tag" style={{ background: 'var(--accent-yellow)', color: '#000', border: '2px solid #000' }}>Featured</span>}
-                      </div>
+                <motion.article
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-30px' }}
+                  exit={{ opacity: 0, scale: 0.97 }}
+                  transition={{ duration: 0.4, delay: Math.min(i * 0.06, 0.3), ease: 'easeOut' }}
+                  className="brutal-card lift"
+                  style={{ overflow: 'hidden', alignSelf: 'start' }}
+                >
+                  <div className="project-media">
+                    <img src={project.image} alt={`Project: ${project.title}`}
+                      width={600} height={338}
+                      loading="lazy" decoding="async" />
+                  </div>
+
+                  <div style={{ padding: '1.15rem' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.7rem' }}>
+                      <span className="brutal-tag" style={{ background: 'var(--color-secondary)', color: '#F5F1E8' }}>
+                        {project.category}
+                      </span>
+                      {project.featured && (
+                        <span className="brutal-tag" style={{ background: 'var(--color-primary)' }}>
+                          Featured
+                        </span>
+                      )}
                     </div>
-                    <div style={{ padding: '1.25rem' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                        <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>{project.title}</h3>
-                        {isExpanded ? <FiChevronUp size={20} /> : <FiChevronDown size={20} />}
-                      </div>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '0.75rem', display: '-webkit-box', WebkitLineClamp: isExpanded ? 10 : 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                        {project.description}
-                      </p>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1rem' }}>
-                        {project.techStack.map(t => <span key={t} className="tech-pill">{t}</span>)}
-                      </div>
-                      <div style={{ display: 'flex', gap: '0.75rem' }}>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer"
-                          onClick={e => e.stopPropagation()}
-                          className="brutal-btn" style={{ padding: '0.5rem 1rem', fontSize: '0.78rem', minHeight: 40 }}>
-                          <FiGithub size={14} /> Code
+
+                    <h3 style={{ fontSize: '1.2rem', lineHeight: 1.25, marginBottom: '0.6rem' }}>
+                      {project.title}
+                    </h3>
+
+                    <p style={{
+                      fontSize: '0.9rem',
+                      color: 'var(--color-fg-2)',
+                      lineHeight: 1.65,
+                      marginBottom: 0,
+                      display: '-webkit-box',
+                      WebkitLineClamp: isExpanded ? 99 : 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}>
+                      {project.description}
+                    </p>
+
+                    <button type="button" className="read-more"
+                      aria-expanded={isExpanded}
+                      onClick={() => setExpanded(isExpanded ? null : project.id)}>
+                      {isExpanded ? 'Show less' : 'Read more'}
+                      <FiChevronDown size={14} aria-hidden="true"
+                        style={{ transform: isExpanded ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                    </button>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', margin: '0.9rem 0 1.1rem' }}>
+                      {project.techStack.map(t => <span key={t} className="tech-pill">{t}</span>)}
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                        className="brutal-btn"
+                        style={{ padding: '0.5rem 0.9rem', fontSize: '0.78rem', minHeight: 44 }}
+                        aria-label={`View ${project.title} source code on GitHub`}>
+                        <FiGithub size={14} aria-hidden="true" /> Code
+                      </a>
+                      {project.live !== '#' && (
+                        <a href={project.live} target="_blank" rel="noopener noreferrer"
+                          className="brutal-btn brutal-btn-alt"
+                          style={{ padding: '0.5rem 0.9rem', fontSize: '0.78rem', minHeight: 44 }}
+                          aria-label={`Open ${project.title} live demo`}>
+                          <FiExternalLink size={14} aria-hidden="true" /> Live
                         </a>
-                        {project.live !== '#' && (
-                          <a href={project.live} target="_blank" rel="noopener noreferrer"
-                            onClick={e => e.stopPropagation()}
-                            className="brutal-btn brutal-btn-alt" style={{ padding: '0.5rem 1rem', fontSize: '0.78rem', minHeight: 40 }}>
-                            <FiExternalLink size={14} /> Live
-                          </a>
-                        )}
-                      </div>
+                      )}
                     </div>
                   </div>
-                </motion.div>
+                </motion.article>
               )
             })}
           </AnimatePresence>
         </div>
+
+        <motion.div {...reveal}
+          style={{ marginTop: '2.25rem', display: 'flex', gap: '0.6rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {hasMore && (
+            <button type="button" className="brutal-btn brutal-btn-primary"
+              onClick={() => setVisibleCount(filtered.length)}>
+              Load More Projects <FiChevronDown aria-hidden="true" size={16} />
+            </button>
+          )}
+          <a className="brutal-btn" href={personalInfo.github} target="_blank" rel="noopener noreferrer"
+            aria-label="View all projects on GitHub">
+            <FiGithub size={16} aria-hidden="true" /> View All Projects
+          </a>
+        </motion.div>
       </div>
     </section>
   )
