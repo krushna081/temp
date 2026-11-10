@@ -16,7 +16,7 @@ Live Demo: [krushna081.online](https://krushna081.online)
 - **Typography System**: Space Grotesk (headings) · Inter (body) · IBM Plex Mono (labels & metadata)
 - **Mobile-First**: One-handed navigation, 44px+ touch targets, `clamp()`-based type scale, no horizontal scroll
 - **Sticky Header Navigation**: Desktop inline nav with scroll-spy; accessible full-screen mobile menu (Esc to close, focus-visible, scroll lock)
-- **Projects**: Filterable project grid (All / Full Stack Development / Cybersecurity / Security Research / Development / Research), lightweight cards with lazy-loaded thumbnails and future-proof "Load More" support
+- **Projects**: Initially 3 large featured cards (Chakravyuh AI as the full-width hero) with category filters (All / AI Engineering / Full Stack Development / Cybersecurity / Security Research / Development / Research); "Explore More Projects" smoothly expands all remaining projects, "Show Less Projects" collapses back — lazy-loaded thumbnails, Read more/Show less descriptions, 44px touch targets
 - **Gravity Experiment**: Toggle gyroscope-controlled physics — tilt your phone to make floating tech icons slide like marbles (with bounce-back at edges)
 - **Dark/Light Mode**: Seamless theme switching with localStorage persistence
 - **Calendly Integration**: Smart meeting popup with 7-day cooldown and dedicated schedule button
@@ -84,7 +84,7 @@ Tap the move icon in the header (or inside the mobile menu) to activate the grav
 │   ├── components/
 │   │   ├── Header.jsx                 # Sticky nav: desktop links + mobile menu + toggles
 │   │   ├── DigitalIdentity.jsx        # Hero section with editorial typography
-│   │   ├── FeaturedProjects.jsx       # Filterable, load-more project grid
+│   │   ├── FeaturedProjects.jsx       # 3 featured cards + filters + expand/collapse grid
 │   │   ├── WhoAmI.jsx                 # About / bio / education
 │   │   ├── CyberCommandCenter.jsx     # Skills by category with progress bars
 │   │   ├── CareerJourney.jsx          # Vertical timeline (petrol rail, persimmon nodes)
@@ -120,7 +120,7 @@ export const showDotGrid = true        // Toggle background dot grid on/off
 
 The contact form requires `VITE_WEB3FORMS_ACCESS_KEY` (see `.env`).
 
-Project filters and the "Load More" threshold are defined at the top of `src/components/FeaturedProjects.jsx` (`FILTERS`, `INITIAL_VISIBLE`).
+Project filters (`FILTERS`, including the new AI Engineering category), the featured-card count (`FEATURED_COUNT = 3`), and expansion logic live at the top of `src/components/FeaturedProjects.jsx`. Chakravyuh AI project data lives in `src/data/index.js` with its thumbnail at `public/images/chakravyuh-ai.svg`.
 
 ---
 

@@ -50,6 +50,18 @@ export const personalInfo = {
 
 /* ---- Projects / Research ---- */
 export const projects = [
+  {
+    id: 7,
+    title: 'Chakravyuh AI',
+    description: 'An open-source, multi-agent AI operating system — a central Control Agent orchestrates 10 specialized agents (coder, researcher, planner, QA, security, and more) that break down complex tasks and execute them autonomously.\n\nModel Flexibility: Ollama Cloud, local Ollama, OpenAI, Anthropic, DeepSeek, Google, and Groq — with local / hybrid / cloud routing modes.\n\nCapabilities: MCP tools (filesystem, web fetch/search, GitHub, Docker, terminal), tiered memory on SQLite + ChromaDB, and a React + Vite Command Center dashboard for live agent execution.\n\nStack: Python, FastAPI, React, Vite, Ollama, SQLite, ChromaDB, MCP, Docker. Apache 2.0 licensed, v0.2.0-alpha.',
+    image: '/images/chakravyuh-ai.svg',
+    techStack: ['Python', 'FastAPI', 'React', 'Vite', 'Ollama', 'SQLite', 'ChromaDB', 'MCP', 'Docker'],
+    category: 'AI Engineering',
+    github: 'https://github.com/krushna081/chakravyuh-ai',
+    live: 'https://krushna081.github.io/chakravyuh-ai/',
+    featured: true,
+    status: 'Alpha · v0.2.0-alpha',
+  },
    {
   id: 1,
   title: 'Full Stack Secure Chat Application Development',
