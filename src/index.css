@@ -77,6 +77,9 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Scroll-margin mirrors the header offset for programmatic scrollIntoView */
+section[id] { scroll-margin-top: 84px; }
+
 body {
   font-family: var(--font-body);
   background: var(--color-bg);

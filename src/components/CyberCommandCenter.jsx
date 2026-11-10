@@ -19,7 +19,7 @@ export default function CyberCommandCenter() {
         <motion.header {...reveal}>
           <p className="section-label">04 — Skills</p>
           <h2 className="section-title">Cyber <span className="tint">Command Center</span></h2>
-          <p className="section-subtitle">My arsenal of tools, technologies, and expertise.</p>
+          <p className="section-subtitle">Security tooling, full-stack development, and AI engineering skills.</p>
         </motion.header>
 
         <motion.div {...reveal} className="skill-tabs" role="group" aria-label="Skill categories">

@@ -116,7 +116,7 @@ export default function FeaturedProjects() {
         <motion.header {...reveal}>
           <p className="section-label">02 — Portfolio</p>
           <h2 className="section-title">Featured <span className="tint">Projects</span></h2>
-          <p className="section-subtitle">Real-world builds — from secure apps to security tools.</p>
+          <p className="section-subtitle">Real-world builds — cybersecurity tools, secure apps, and AI engineering.</p>
         </motion.header>
 
         <motion.div {...reveal} className="filter-row" role="group" aria-label="Filter projects by category">
@@ -146,8 +146,8 @@ export default function FeaturedProjects() {
               style={{ overflow: 'hidden', alignSelf: 'start' }}
             >
               <div className="project-media">
-                <img src={project.image} alt={`Project: ${project.title}`}
-                  width={600} height={338}
+                <img src={project.image} alt={`${project.title} — ${project.category} project cover`}
+                  width={800} height={450}
                   loading="lazy" decoding="async" />
               </div>
               <ProjectCardBody project={project} isHero={i === 0 && featured.length > 2} />
@@ -176,8 +176,8 @@ export default function FeaturedProjects() {
                     style={{ overflow: 'hidden', alignSelf: 'start' }}
                   >
                     <div className="project-media">
-                      <img src={project.image} alt={`Project: ${project.title}`}
-                        width={600} height={338}
+                      <img src={project.image} alt={`${project.title} — ${project.category} project cover`}
+                        width={800} height={450}
                         loading="lazy" decoding="async" />
                     </div>
                     <ProjectCardBody project={project} isHero={false} />

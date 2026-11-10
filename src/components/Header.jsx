@@ -4,9 +4,9 @@ import {
   FiDownload, FiGithub, FiInstagram, FiLinkedin, FiMail,
   FiMenu, FiMove, FiMoon, FiSun, FiTwitter, FiX,
 } from 'react-icons/fi'
-import { Link } from 'react-scroll'
 import { useTheme } from '../context/ThemeContext'
 import { personalInfo } from '../data'
+import ScrollLink, { useActiveSection } from './ScrollLink'
 
 const NAV_ITEMS = [
   { num: '01', label: 'Home', to: 'identity' },
@@ -29,6 +29,7 @@ const SOCIALS = [
 export default function Header({ gravityEnabled, onToggleGravity }) {
   const { isDark, toggleTheme } = useTheme()
   const [open, setOpen] = useState(false)
+  const activeSection = useActiveSection(NAV_ITEMS.map(item => item.to))
 
   useEffect(() => {
     if (!open) return
@@ -46,18 +47,19 @@ export default function Header({ gravityEnabled, onToggleGravity }) {
     <>
       <header className="site-header">
         <div className="header-inner">
-          <Link to="identity" smooth offset={-84} duration={500} className="brand"
+          <ScrollLink to="identity" className="brand"
             aria-label="Krushna081 — back to top">
             <span className="brand-mark" aria-hidden="true">KJ</span>
             <span className="brand-name">KRUSHNA081</span>
-          </Link>
+          </ScrollLink>
 
           <nav className="header-nav" aria-label="Primary navigation">
             {NAV_ITEMS.map(item => (
-              <Link key={item.to} to={item.to} smooth spy offset={-84} duration={500}
-                className="header-link" activeClass="active">
+              <ScrollLink key={item.to} to={item.to}
+                className={`header-link${activeSection === item.to ? ' active' : ''}`}
+                aria-current={activeSection === item.to ? 'true' : undefined}>
                 {item.label}
-              </Link>
+              </ScrollLink>
             ))}
           </nav>
 
@@ -132,11 +134,11 @@ export default function Header({ gravityEnabled, onToggleGravity }) {
             <ul className="menu-list">
               {NAV_ITEMS.map(item => (
                 <li key={item.to}>
-                  <Link to={item.to} smooth offset={-84} duration={450}
-                    className="menu-item" onClick={() => setOpen(false)}>
+                  <ScrollLink to={item.to}
+                    className="menu-item" onNavigate={() => setOpen(false)}>
                     <span className="menu-item-num" aria-hidden="true">{item.num}</span>
                     <span className="menu-item-label">{item.label}</span>
-                  </Link>
+                  </ScrollLink>
                 </li>
               ))}
             </ul>

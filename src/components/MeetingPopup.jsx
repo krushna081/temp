@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiX, FiCalendar } from 'react-icons/fi'
+import { BOOKING_URL, openBookingPopup } from '../calendly'
 
 const LS_KEY_DISMISSED = 'meeting-popup-dismissed'
 const LS_KEY_BOOKED = 'meeting-popup-booked'
@@ -22,18 +23,8 @@ export default function MeetingPopup() {
       }
     }
 
-    if (!document.querySelector('link[href="https://assets.calendly.com/assets/external/widget.css"]')) {
-      const link = document.createElement('link')
-      link.href = 'https://assets.calendly.com/assets/external/widget.css'
-      link.rel = 'stylesheet'
-      document.head.appendChild(link)
-    }
-    if (!document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
-      const script = document.createElement('script')
-      script.src = 'https://assets.calendly.com/assets/external/widget.js'
-      script.async = true
-      document.head.appendChild(script)
-    }
+    /* No Calendly script injection here — the widget loads on demand in
+       handleBook so the popup can show without any external network cost. */
 
     const delay = 10000 + Math.random() * 5000
 
@@ -54,11 +45,7 @@ export default function MeetingPopup() {
     localStorage.setItem(LS_KEY_BOOKED, 'true')
 
     setTimeout(() => {
-      if (window.Calendly) {
-        window.Calendly.initPopupWidget({ url: 'https://calendly.com/krushnacjadhav0807' })
-      } else {
-        window.open('https://calendly.com/krushnacjadhav0807', '_blank')
-      }
+      openBookingPopup(BOOKING_URL)
     }, 300)
   }, [])
 
@@ -113,7 +100,7 @@ export default function MeetingPopup() {
               <FiX />
             </button>
 
-            <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>👋</div>
+            <div aria-hidden="true" style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>👋</div>
             <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.75rem', lineHeight: 1.2 }}>
               Let's Connect
             </h2>

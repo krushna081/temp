@@ -10,4 +10,20 @@ export default defineConfig({
   ],
   // base is '/' for custom domain; use '/repo-name/' for github.io subdirectory
   base: '/',
+  build: {
+    rollupOptions: {
+      output: {
+        // Framer Motion is a stable vendor library — keep it in its own
+        // cacheable chunk so it isn't re-downloaded when app code changes.
+        manualChunks(id) {
+          if (
+            id.includes('framer-motion') ||
+            id.includes('motion-dom') ||
+            id.includes('motion-utils') ||
+            id.includes('@motionone')
+          ) return 'vendor-motion'
+        },
+      },
+    },
+  },
 })

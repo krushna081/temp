@@ -28,7 +28,7 @@ export default function WhoAmI() {
         <motion.header {...reveal}>
           <p className="section-label">03 — About</p>
           <h2 className="section-title">Who Am I<span className="tint">?</span></h2>
-          <p className="section-subtitle">A builder, a researcher, and a problem solver.</p>
+          <p className="section-subtitle">Ethical hacker, security researcher, and React developer based in Maharashtra, India.</p>
         </motion.header>
 
         <div className="about-grid">
@@ -43,6 +43,14 @@ export default function WhoAmI() {
               marginBottom: '1rem',
             }}>
               {personalInfo.about}
+            </p>
+            <p style={{
+              color: 'var(--color-fg-2)',
+              lineHeight: 1.7,
+              fontSize: '0.95rem',
+              marginBottom: '1.1rem',
+            }}>
+              {personalInfo.aboutLegacy}
             </p>
             <p style={{
               color: 'var(--color-fg-2)',

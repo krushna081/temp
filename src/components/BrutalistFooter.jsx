@@ -1,8 +1,8 @@
-import { Link } from 'react-scroll'
 import {
   FiArrowUp, FiGithub, FiInstagram, FiLinkedin, FiMail, FiTwitter,
 } from 'react-icons/fi'
 import { personalInfo } from '../data'
+import ScrollLink from './ScrollLink'
 
 const SOCIALS = [
   { icon: <FiGithub size={18} aria-hidden="true" />, href: personalInfo.github, label: 'GitHub' },
@@ -86,11 +86,9 @@ export default function BrutalistFooter() {
                       {l.label}
                     </a>
                   ) : (
-                    <Link to={l.to} smooth offset={-84} duration={450}
-                      className="footer-link"
-                      style={{ cursor: 'pointer' }}>
+                    <ScrollLink to={l.to} className="footer-link">
                       {l.label}
-                    </Link>
+                    </ScrollLink>
                   )}
                 </li>
               ))}
@@ -139,15 +137,12 @@ export default function BrutalistFooter() {
           <p style={{ color: '#C9C4B6', fontSize: '0.75rem', fontWeight: 500 }}>
             © {year} {personalInfo.name}. Built with <span aria-hidden="true">❤️</span> love
           </p>
-          <Link to="identity" smooth offset={-84} duration={800} style={{ cursor: 'pointer' }}>
-            <button
-              type="button"
-              className="footer-social"
-              style={{ width: 'auto', padding: '0.55rem 0.9rem', gap: '0.45rem', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}
-              aria-label="Back to top">
-              Back to Top <FiArrowUp size={14} aria-hidden="true" />
-            </button>
-          </Link>
+          <ScrollLink to="identity"
+            className="footer-social"
+            style={{ width: 'auto', padding: '0.55rem 0.9rem', gap: '0.45rem', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}
+            aria-label="Back to top">
+            Back to Top <FiArrowUp size={14} aria-hidden="true" />
+          </ScrollLink>
         </div>
       </div>
     </footer>

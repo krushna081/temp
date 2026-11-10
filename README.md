@@ -2,7 +2,7 @@
 
 A mobile-first, editorial neo-brutalist portfolio built with **React 19** and **Vite 6**. Features a sticky header with an accessible mobile menu, a gravity-controlled tech icons experiment, dark/light mode, and Calendly meeting integration.
 
-Live Demo: [krushna081.online](https://krushna081.online)
+Live Demo: [krushna081.online](https://www.krushna081.online/)
 
 ---
 
@@ -35,7 +35,7 @@ Live Demo: [krushna081.online](https://krushna081.online)
 | **Routing** | React Router (HashRouter) |
 | **Interactive Logic** | react-scroll, DeviceOrientation API |
 | **Contact Form** | Web3Forms |
-| **Deployment** | GitHub Pages |
+| **Deployment** | Vercel (`vercel.json` handles apex→www and `/index.html` redirects) |
 
 ---
 
@@ -121,6 +121,16 @@ export const showDotGrid = true        // Toggle background dot grid on/off
 The contact form requires `VITE_WEB3FORMS_ACCESS_KEY` (see `.env`).
 
 Project filters (`FILTERS`, including the new AI Engineering category), the featured-card count (`FEATURED_COUNT = 3`), and expansion logic live at the top of `src/components/FeaturedProjects.jsx`. Chakravyuh AI project data lives in `src/data/index.js` with its thumbnail at `public/images/chakravyuh-ai.svg`.
+
+---
+
+## SEO & Hosting
+
+- **`public/robots.txt`** — allows all crawlers, points to the sitemap
+- **`public/sitemap.xml`** — single canonical URL: `https://www.krushna081.online/`
+- **`index.html`** — canonical link, Open Graph / Twitter cards (image: `/og-card.png`), robots directives, and JSON-LD (`Person`, `WebSite`, `ProfilePage`, `SoftwareSourceCode` for Chakravyuh AI)
+- **`vercel.json`** — permanent 308 redirects: `krushna081.online` → `https://www.krushna081.online`, `/index.html` → `/`, plus asset cache headers and `nosniff` / `X-Frame-Options` hardening
+- **Social card** — regenerate `public/og-card.png` after editing `public/og-card.svg` with `node scripts/build-og-image.mjs`
 
 ---
 

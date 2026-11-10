@@ -1,38 +1,18 @@
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FiCalendar } from 'react-icons/fi'
+import { BOOKING_URL, openBookingPopup } from '../calendly'
 
 export default function ScheduleMeetingButton() {
-  const animRef = useRef(null)
-
-  useEffect(() => {
-    if (!document.querySelector('link[href="https://assets.calendly.com/assets/external/widget.css"]')) {
-      const link = document.createElement('link')
-      link.href = 'https://assets.calendly.com/assets/external/widget.css'
-      link.rel = 'stylesheet'
-      document.head.appendChild(link)
-    }
-
-    if (!document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
-      const script = document.createElement('script')
-      script.src = 'https://assets.calendly.com/assets/external/widget.js'
-      script.async = true
-      document.head.appendChild(script)
-    }
-  }, [])
+  /* Calendly script/CSS load lazily inside openBookingPopup — only when the
+     visitor actually clicks. Nothing external network-wise at page load. */
 
   const openCalendly = (e) => {
     e.preventDefault()
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: 'https://calendly.com/krushnacjadhav0807' })
-    } else {
-      window.open('https://calendly.com/krushnacjadhav0807', '_blank')
-    }
+    openBookingPopup(BOOKING_URL)
   }
 
   return (
     <motion.button
-      ref={animRef}
       onClick={openCalendly}
       aria-label="Schedule a Meeting"
       initial={{ opacity: 0, scale: 0.8 }}

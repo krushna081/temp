@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { motion } from 'framer-motion'
 import { FiArrowDown, FiDownload, FiEye, FiMail } from 'react-icons/fi'
-import { Link } from 'react-scroll'
+import ScrollLink from './ScrollLink'
 import { personalInfo } from '../data'
 import { showDotGrid } from '../config'
 
@@ -28,6 +28,10 @@ const fadeUp = (delay) => ({
 export default function DigitalIdentity() {
   const firstName = personalInfo.name.split(' ')[0]
   const lastName = personalInfo.name.split(' ').slice(1).join(' ')
+
+  /* Lead with two whole sentences instead of a hard 180-char cut. */
+  const introSentences = personalInfo.about.split(/(?=\.)\s+/).slice(0, 2).join(' ').trim()
+  const intro = introSentences || personalInfo.about
 
   return (
     <section id="identity" className="hero" style={{
@@ -71,24 +75,20 @@ export default function DigitalIdentity() {
 
         <motion.p {...fadeUp(0.24)}
           style={{ fontSize: 'clamp(0.95rem, 2.8vw, 1.06rem)', lineHeight: 1.7, color: 'var(--color-fg-2)', maxWidth: 580, marginBottom: '1.9rem' }}>
-          {personalInfo.about.slice(0, 180)}...
+          {intro}
         </motion.p>
 
         <motion.div {...fadeUp(0.3)}
           style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem', marginBottom: 'clamp(2rem, 6vw, 3rem)' }}>
-          <Link to="featured-projects" smooth offset={-84} duration={500}>
-            <button type="button" className="brutal-btn brutal-btn-primary">
-              <FiEye aria-hidden="true" size={16} /> View Work
-            </button>
-          </Link>
+          <ScrollLink to="featured-projects" className="brutal-btn brutal-btn-primary">
+            <FiEye aria-hidden="true" size={16} /> View Work
+          </ScrollLink>
           <a href={personalInfo.resumeUrl} download className="brutal-btn brutal-btn-ink">
             <FiDownload aria-hidden="true" size={16} /> Resume
           </a>
-          <Link to="collab" smooth offset={-84} duration={500}>
-            <button type="button" className="brutal-btn brutal-btn-alt">
-              <FiMail aria-hidden="true" size={16} /> Contact
-            </button>
-          </Link>
+          <ScrollLink to="collab" className="brutal-btn brutal-btn-alt">
+            <FiMail aria-hidden="true" size={16} /> Contact
+          </ScrollLink>
         </motion.div>
 
         <motion.div {...fadeUp(0.38)}>
@@ -107,8 +107,14 @@ export default function DigitalIdentity() {
 
       <motion.div {...fadeUp(0.5)}
         style={{ display: 'flex', justifyContent: 'center', marginTop: '2.25rem', paddingBottom: '1rem' }}>
-        <Link to="featured-projects" smooth offset={-84} duration={500} aria-label="Scroll down to projects"
-          style={{ textDecoration: 'none' }}>
+        <ScrollLink to="featured-projects" aria-label="Scroll down to projects"
+          style={{
+            textDecoration: 'none',
+            border: 'none',
+            background: 'none',
+            cursor: 'pointer',
+            padding: 0,
+          }}>
           <div className="scroll-cue" style={{
             display: 'flex',
             flexDirection: 'column',
@@ -123,7 +129,7 @@ export default function DigitalIdentity() {
             <FiArrowDown aria-hidden="true" size={18} />
             <span>Scroll</span>
           </div>
-        </Link>
+        </ScrollLink>
       </motion.div>
     </section>
   )
